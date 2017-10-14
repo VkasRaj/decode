@@ -14,6 +14,7 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang='sass' scoped>
+  #render
+    padding : .25rem
 </style>

@@ -63,7 +63,7 @@ export default {
   .bg-body
     background: #21252b
   textarea
-    font-family: 'Questrial', sans-serif;
+    font-family: 'Consolas'
     border: none
     outline: none
     padding: .5rem .8rem
