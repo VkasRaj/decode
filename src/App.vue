@@ -3,9 +3,9 @@
     <div class="container-fluid h-100">
       <div class="row h-100">
         <div class="col-12 col-lg-6">
-          <app-html @onHTML='htmlAdded = $event' @keyup.native.ctrl.enter="showOutput"></app-html>
-          <app-css @onCSS='cssAdded = $event' @keyup.native.ctrl.enter="showOutput"></app-css>
-          <app-js @onJS='jsAdded = $event' @keyup.native.ctrl.enter="showOutput"></app-js>
+          <app-html :newHtml='h' @onHTML='htmlAdded = $event' @keyup.native.ctrl.enter="showOutput"></app-html>
+          <app-css :newCss='c' @onCSS='cssAdded = $event' @keyup.native.ctrl.enter="showOutput"></app-css>
+          <app-js :newJs='j' @onJS='jsAdded = $event' @keyup.native.ctrl.enter="showOutput"></app-js>
         </div>
         <div class="col-12 col-lg-6">
           <app-render :iHTML='htmlAdded' :iCSS='cssAdded' :iJS='jsAdded'>
@@ -30,7 +30,10 @@ export default {
     return {
       htmlAdded: '',
       cssAdded: '',
-      jsAdded: ''
+      jsAdded: '',
+      h : '',
+      c : '',
+      j : ''
     }
   },
   components: {
@@ -41,9 +44,26 @@ export default {
   },
   methods: {
     showOutput() {
-      let frame = this.$refs.iframe;
-      frame.srcdoc = `${this.htmlAdded}<style>${this.cssAdded}</style><script>${this.jsAdded}<\/script>`;
+      this.$refs.iframe.srcdoc = `${this.htmlAdded}<style>${this.cssAdded}</style><script>${this.jsAdded}<\/script>`;
+      this.setStorage('htmlStorage', this.htmlAdded);
+      this.setStorage('cssStorage', this.cssAdded);
+      this.setStorage('jsStorage', this.jsAdded);
+    },
+    setStorage(key, value) {
+      sessionStorage.setItem(key, value);
+    },
+    getStorage(key) {
+      return sessionStorage.getItem(key);
     }
+  },
+  mounted() {
+    this.h = this.getStorage('htmlStorage');
+    this.c = this.getStorage('cssStorage');
+    this.j = this.getStorage('jsStorage');
+    this.htmlAdded = this.h;
+    this.cssAdded = this.c;
+    this.jsAdded = this.j;
+    this.$refs.iframe.srcdoc = `${this.htmlAdded}<style>${this.cssAdded}</style><script>${this.jsAdded}<\/script>`;
   }
 }
 </script>
