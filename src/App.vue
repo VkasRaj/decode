@@ -63,7 +63,9 @@ export default {
     this.htmlAdded = this.h;
     this.cssAdded = this.c;
     this.jsAdded = this.j;
-    this.$refs.iframe.srcdoc = `${this.htmlAdded}<style>${this.cssAdded}</style><script>${this.jsAdded}<\/script>`;
+    if (sessionStorage.length) {
+      this.$refs.iframe.srcdoc = `${this.h}<style>${this.c}</style><script>${this.j}<\/script>`;
+    }
   }
 }
 </script>
