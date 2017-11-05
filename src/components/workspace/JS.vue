@@ -1,7 +1,7 @@
 <template>
   <div id="js">
       <textarea name="" id="" class='bg-work text-white w-100 h-100' v-model="val_js" @input="fireJS"></textarea>
-      <small class="text-secondary">JS</small>
+      <small class="text-secondary lang-title">JS</small>
   </div>
 </template>
 

@@ -42,7 +42,6 @@ export default {
   methods: {
     showOutput() {
       let frame = this.$refs.iframe;
-      // console.log(frame.__proto__);
       frame.srcdoc = `${this.htmlAdded}<style>${this.cssAdded}</style><script>${this.jsAdded}<\/script>`;
     }
   }
@@ -74,7 +73,7 @@ export default {
     position: relative
     height: calc(100 / 3 * 1%)
     padding: .25rem
-    &>small
+    &>small.lang-title
       position: absolute
       right: .9rem
       bottom: .8rem

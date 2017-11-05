@@ -1,7 +1,7 @@
 <template>
   <div id="css">
       <textarea name="" id="" class='bg-work text-white w-100 h-100' v-model="val_css" @input="fireCSS"></textarea>
-      <small class="text-secondary">CSS</small>
+      <small class="text-secondary lang-title">CSS</small>
   </div>
 </template>
 
