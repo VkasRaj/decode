@@ -6,7 +6,6 @@
 
 <script>
 export default {
-  props : ['iHTML', 'iCSS', 'iJS'],
   data() {
     return {
     }
@@ -15,6 +14,4 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-  #render
-    padding : .25rem
 </style>
