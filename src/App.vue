@@ -125,6 +125,9 @@ export default {
   .bg-body {
     background: $body;
   }
+  .shadow {
+      box-shadow: 0 0 .5rem transparentize(#111,.5);
+  }
   
   #html, #css, #js {
     position: relative;
@@ -136,7 +139,6 @@ export default {
       padding: .5rem .8rem;
       resize: none;
       font-size: .95rem;
-      box-shadow: 0 0 .5rem transparentize(#111,.5);
     }
     & > small.lang-title {
       position: absolute;

@@ -1,6 +1,6 @@
 <template>
   <div id="css">
-      <textarea name="" id="" class='bg-work text-white w-100 h-100' v-model="val_css" v-text="newCss"></textarea>
+      <textarea name="" id="" class='bg-work text-white w-100 h-100 shadow' v-model="val_css" v-text="newCss"></textarea>
       <small class="text-secondary lang-title">CSS</small>
   </div>
 </template>

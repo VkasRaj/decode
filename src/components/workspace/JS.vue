@@ -1,6 +1,6 @@
 <template>
   <div id="js" class="pt-2">
-      <textarea name="" id="" class='bg-work text-white w-100 h-100' v-model="val_js" v-text="newJs"></textarea>
+      <textarea name="" id="" class='bg-work text-white w-100 h-100 shadow' v-model="val_js" v-text="newJs"></textarea>
       <small class="text-secondary lang-title">JS</small>
   </div>
 </template>
