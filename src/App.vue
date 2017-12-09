@@ -5,12 +5,12 @@
         <div class="col-12 mb-2">
           <app-header @upOnSave='showOutput' :iHTML='htmlAdded' :iCSS='cssAdded' :iJS='jsAdded'></app-header>
         </div>
-        <div class="col-12 col-lg-6 h-100">
+        <div class="col-12 col-lg-6 h-100 pr-lg-2">
           <app-html :newHtml='h' @onHTML='htmlAdded = $event' @keyup.native.ctrl.enter="showOutput" @keydown.native.tab.prevent="addSpaces($event.target)"></app-html>
           <app-css :newCss='c' @onCSS='cssAdded = $event' @keyup.native.ctrl.enter="showOutput" @keydown.native.tab.prevent="addSpaces($event.target)"></app-css>
           <app-js :newJs='j' @onJS='jsAdded = $event' @keyup.native.ctrl.enter="showOutput" @keydown.native.tab.prevent="addSpaces($event.target)"></app-js>
         </div>
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 pl-lg-2">
           <app-render>
             <template slot="iframe">
               <iframe src="" frameborder="0" class="bg-white w-100 h-100" ref="iframe" srcdoc=""></iframe>
@@ -139,6 +139,9 @@ export default {
       bottom: .8rem;
       z-index: 100;
     }
+  }
+  .pointer {
+    cursor: pointer;
   }
   @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
 </style>
