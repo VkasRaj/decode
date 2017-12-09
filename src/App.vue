@@ -1,11 +1,15 @@
 <template>
-  <div id="app" class="h-100">
-    <div class="container-fluid h-100">
-      <div class="row h-100">
+  <div id="app" class="h-100 d-flex flex-column py-2">
+    <div class="container-fluid">
+      <div class="row">
         <div class="col-12 mb-2">
-          <app-header @upOnSave='showOutput' :iHTML='htmlAdded' :iCSS='cssAdded' :iJS='jsAdded'></app-header>
+            <app-header @upOnSave='showOutput' :iHTML='htmlAdded' :iCSS='cssAdded' :iJS='jsAdded'></app-header>
         </div>
-        <div class="col-12 col-lg-6 h-100 pr-lg-2">
+      </div>
+    </div>
+    <div class="container-fluid d-flex flex-column flex-grow">
+      <div class="row flex-grow">
+        <div class="col-12 col-lg-6 pr-lg-2">
           <app-html :newHtml='h' @onHTML='htmlAdded = $event' @keyup.native.ctrl.enter="showOutput" @keydown.native.tab.prevent="addSpaces($event.target)"></app-html>
           <app-css :newCss='c' @onCSS='cssAdded = $event' @keyup.native.ctrl.enter="showOutput" @keydown.native.tab.prevent="addSpaces($event.target)"></app-css>
           <app-js :newJs='j' @onJS='jsAdded = $event' @keyup.native.ctrl.enter="showOutput" @keydown.native.tab.prevent="addSpaces($event.target)"></app-js>
@@ -104,6 +108,7 @@ export default {
   $body: #21252b;
   $work: #282c34;
   $light: #868e96;
+
   ::-webkit-scrollbar {
     width: .3rem;
   }
@@ -142,6 +147,9 @@ export default {
   }
   .pointer {
     cursor: pointer;
+  }
+  .flex-grow {
+    flex-grow: 1;
   }
   @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
 </style>
