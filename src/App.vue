@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="h-100 d-flex flex-column py-2">
+  <div id="app" class="h-100 d-flex flex-column py-3">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 mb-2">
@@ -105,6 +105,7 @@ export default {
 </script>
 
 <style lang="scss">
+
   $body: #21252b;
   $work: #282c34;
   $light: #868e96;
@@ -130,7 +131,6 @@ export default {
   }
   
   #html, #css, #js {
-    position: relative;
     height: calc(100 / 3 * 1%);
     textarea {
       font-family: 'Consolas';
@@ -140,10 +140,10 @@ export default {
       resize: none;
       font-size: .95rem;
     }
-    & > small.lang-title {
+    & small.lang-title {
       position: absolute;
-      right: .9rem;
-      bottom: .8rem;
+      right: .5rem;
+      bottom: .5rem;
       z-index: 100;
     }
   }
@@ -152,6 +152,14 @@ export default {
   }
   .flex-grow {
     flex-grow: 1;
+  }
+  .setting {
+    background: $body;
+    height: 1.5rem;
+    width: 1.5rem;
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
   }
   @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
 </style>
