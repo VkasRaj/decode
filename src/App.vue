@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { eBus } from "./main";
 import Header from './components/header/Header.vue'
 import Render from './components/render/Render.vue'
 import HTML from './components/workspace/HTML.vue';
@@ -160,6 +161,9 @@ export default {
     position: absolute;
     top: .5rem;
     right: .5rem;
+  }
+  .ltr-space {
+    letter-spacing: .1rem;
   }
   @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
 </style>

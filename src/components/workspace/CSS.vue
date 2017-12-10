@@ -3,7 +3,7 @@
     <div class="workarea-wrapper position-relative h-100">
       <textarea name="" id="" class='bg-work text-white w-100 h-100 shadow' v-model="val_css" v-text="newCss"></textarea>
       <small class="text-secondary lang-title">CSS</small>
-      <div class="css-setting">
+      <div class="css-setting pointer">
         <app-setting-icon></app-setting-icon>
       </div>
     </div>

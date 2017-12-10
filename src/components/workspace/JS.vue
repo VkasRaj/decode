@@ -3,7 +3,7 @@
     <div class="workarea-wrapper position-relative h-100">
       <textarea name="" id="" class='bg-work text-white w-100 h-100 shadow' v-model="val_js" v-text="newJs"></textarea>
       <small class="text-secondary lang-title">JS</small>
-      <div class="js-setting">
+      <div class="js-setting pointer">
         <app-setting-icon></app-setting-icon>
       </div>
     </div>
