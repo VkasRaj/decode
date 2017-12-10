@@ -3,7 +3,13 @@ import App from './App.vue'
 
 export const eBus = new Vue({
   data : {
-    saved: false
+    saved: true,
+    setting : false,
+  },
+  methods : {
+    onSave(param) {
+      this.$emit('uponSave', param);
+    }
   }
 });
 

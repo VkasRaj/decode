@@ -27,82 +27,83 @@
 </template>
 
 <script>
-import { eBus } from "./main";
-import Header from './components/header/Header.vue'
-import Render from './components/render/Render.vue'
-import HTML from './components/workspace/HTML.vue';
-import CSS from './components/workspace/CSS.vue';
-import JS from './components/workspace/JS.vue';
+  import { eBus } from "./main";
+  import Header from './components/header/Header.vue'
+  import Render from './components/render/Render.vue'
+  import HTML from './components/workspace/HTML.vue';
+  import CSS from './components/workspace/CSS.vue';
+  import JS from './components/workspace/JS.vue';
 
-export default {
-  data() {
-    return {
-      htmlAdded: '',
-      cssAdded: '',
-      jsAdded: '',
-      h : '',
-      c : '',
-      j : ''
-    }
-  },
-  components: {
-    appHeader: Header,
-    appRender: Render,
-    appHtml: HTML,
-    appCss: CSS,
-    appJs: JS
-  },
-  methods: {
-    setStorage(key, value) {
-      sessionStorage.setItem(key, value);
+  export default {
+    data() {
+      return {
+        htmlAdded: '',
+        cssAdded: '',
+        jsAdded: '',
+        h : '',
+        c : '',
+        j : ''
+      }
     },
-    getStorage(key) {
-      return sessionStorage.getItem(key);
+    components: {
+      appHeader: Header,
+      appRender: Render,
+      appHtml: HTML,
+      appCss: CSS,
+      appJs: JS
     },
-    showOutput() {
-      if (this.htmlAdded === 'null') {
-        this.htmlAdded = '';
+    methods: {
+      setStorage(key, value) {
+        sessionStorage.setItem(key, value);
+      },
+      getStorage(key) {
+        return sessionStorage.getItem(key);
+      },
+      showOutput() {
+        eBus.onSave(true);
+        if (this.htmlAdded === 'null') {
+          this.htmlAdded = '';
+        }
+        if (this.cssAdded === 'null') {
+          this.cssAdded = '';
+        }
+        if (this.jsAdded === 'null') {
+          this.jsAdded = '';
+        }
+        this.$refs.iframe.srcdoc = `${this.htmlAdded}<style>${this.cssAdded}</style><script>${this.jsAdded}<\/script>`;
+        this.setStorage('htmlStorage', this.htmlAdded);
+        this.setStorage('cssStorage', this.cssAdded);
+        this.setStorage('jsStorage', this.jsAdded);
+      },
+      addSpaces(target) {
+        let spaces = (' ').repeat(4);
+        let curPos = target.selectionStart;
+        let endPos = target.selectionEnd;
+        target.value = (target.value).substr(0, curPos) + spaces + (target.value).substr(endPos, target.value.length);
+        target.selectionEnd = curPos + spaces.length;
       }
-      if (this.cssAdded === 'null') {
-        this.cssAdded = '';
-      }
-      if (this.jsAdded === 'null') {
-        this.jsAdded = '';
-      }
-      this.$refs.iframe.srcdoc = `${this.htmlAdded}<style>${this.cssAdded}</style><script>${this.jsAdded}<\/script>`;
-      this.setStorage('htmlStorage', this.htmlAdded);
-      this.setStorage('cssStorage', this.cssAdded);
-      this.setStorage('jsStorage', this.jsAdded);
     },
-    addSpaces(target) {
-      let spaces = (' ').repeat(4);
-      let curPos = target.selectionStart;
-      let endPos = target.selectionEnd;
-      target.value = (target.value).substr(0, curPos) + spaces + (target.value).substr(endPos, target.value.length);
-      target.selectionEnd = curPos + spaces.length;
-    }
-  },
-  mounted() {
-    this.h = this.getStorage('htmlStorage');
-    this.c = this.getStorage('cssStorage');
-    this.j = this.getStorage('jsStorage');
-    this.htmlAdded = this.h;
-    this.cssAdded = this.c;
-    this.jsAdded = this.j;
-    if (sessionStorage.length) {
-      if (this.h === 'null') {
-        this.h = '';
+    mounted() {
+      this.h = this.getStorage('htmlStorage');
+      this.c = this.getStorage('cssStorage');
+      this.j = this.getStorage('jsStorage');
+      this.htmlAdded = this.h;
+      this.cssAdded = this.c;
+      this.jsAdded = this.j;
+      if (sessionStorage.length) {
+        if (this.h === 'null') {
+          this.h = '';
+        }
+        if (this.c === 'null') {
+          this.c = '';
+        }
+        if (this.j === 'null') {
+          this.j = '';
+        }
+        this.$refs.iframe.srcdoc = `${this.h}<style>${this.c}</style><script>${this.j}<\/script>`;
       }
-      if (this.c === 'null') {
-        this.c = '';
-      }
-      if (this.j === 'null') {
-        this.j = '';
-      }
-      this.$refs.iframe.srcdoc = `${this.h}<style>${this.c}</style><script>${this.j}<\/script>`;
     }
   }
-}
 </script>
 
 <style lang="scss">

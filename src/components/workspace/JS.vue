@@ -11,29 +11,30 @@
 </template>
 
 <script>
-import { eBus } from "../../main";
-import Cog from "./Cog.vue";
+  import { eBus } from "../../main";
+  import Cog from "./Cog.vue";
 
-export default {
-  props : {
-    newJs : {
-      type : String
-    }
-  },
-  data() {
-    return {
-      val_js : ''
-    }
-  },
-  components : {
-    appSettingIcon : Cog
-  },
-  watch : {
-    'val_js'() {
-      this.$emit('onJS',this.val_js);
+  export default {
+    props : {
+      newJs : {
+        type : String
+      }
+    },
+    data() {
+      return {
+        val_js : ''
+      }
+    },
+    components : {
+      appSettingIcon : Cog
+    },
+    watch : {
+      'val_js'() {
+        eBus.onSave(false);
+        this.$emit('onJS',this.val_js);
+      }
     }
   }
-}
 </script>
 
 <style>
