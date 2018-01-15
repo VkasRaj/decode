@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+import Editor from "./components/editor/Editor.vue";
+
 export const eBus = new Vue({
   data : {
     saved: true,
@@ -12,6 +14,8 @@ export const eBus = new Vue({
     }
   }
 });
+
+Vue.component('app-editor', Editor);
 
 new Vue({
   el: '#app',
