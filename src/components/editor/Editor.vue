@@ -2,7 +2,7 @@
     <div class="editor">
         <div class="workarea-wrapper position-relative h-100">
             <textarea name="" class="editor-textarea text-white p-2 consolas position-absolute h-100 w-100 border border-white" v-model="code"></textarea>
-            <pre class="bg-work p-2 h-100 border border-white"><code class="text-white consolas" ref="codeView" :class="name">{{ code }}</code></pre>
+            <pre class="bg-work p-2 h-100 m-0 border border-white"><code class="text-white consolas" ref="codeView" :class="name">{{ code }}</code></pre>
             <small class="text-secondary lang-title text-uppercase">{{ name }}</small>
             <!-- <div class="html-setting pointer">
                 <app-setting-icon></app-setting-icon>

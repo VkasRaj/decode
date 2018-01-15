@@ -1,5 +1,5 @@
 <template>
-  <div id="render" class="h-100">
+  <div id="render" class="h-100 bg-white">
       <slot name="iframe"></slot>
   </div>
 </template>

@@ -1,21 +1,39 @@
 <template>
-  <div id="app" class="h-100 d-flex flex-column">
-    <div class="container-fluid">
+  <div id="app" class="d-flex flex-column h-100">
+    <div class="header">
+      <app-header @upOnSave='showOutput' :iHTML='htmlAdded' :iCSS='cssAdded' :iJS='jsAdded'></app-header>
+    </div>
+    <div class="workspace d-flex flex-wrap flex-grow">
+      <div class="col-12 col-md-6 px-0 pl-lg-0 pr-lg-1">
+        <app-editor :name="'html'"></app-editor>
+        <app-editor :name="'css'"></app-editor>
+        <app-editor :name="'js'"></app-editor>
+      </div>
+      <div class="col-12 col-md-6 px-0 pr-lg-0 pl-lg-1">
+        <app-render>
+          <template slot="iframe">
+            <iframe src="" frameborder="0" class="bg-white w-100" ref="iframe" srcdoc=""></iframe>
+          </template>
+        </app-render>
+      </div>
+    </div>
+
+    <!-- <div class="container-fluid">
       <div class="row">
         <div class="col-12 px-0">
             <app-header @upOnSave='showOutput' :iHTML='htmlAdded' :iCSS='cssAdded' :iJS='jsAdded'></app-header>
         </div>
       </div>
-    </div>
-    <div class="container-fluid d-flex flex-column flex-grow">
+    </div> -->
+    <!-- <div class="container-fluid d-flex flex-column flex-grow">
       <div class="row flex-grow">
         <div class="col-12 col-lg-6 px-0 pl-lg-0 pr-lg-1">
           <app-editor :name="'html'"></app-editor>
           <app-editor :name="'css'"></app-editor>
           <app-editor :name="'js'"></app-editor>
-          <!-- <app-html :newHtml='h' @onHTML='htmlAdded = $event' @keyup.native.ctrl.enter="showOutput" @keydown.native.tab.prevent="addSpaces($event.target)"></app-html>
+          <app-html :newHtml='h' @onHTML='htmlAdded = $event' @keyup.native.ctrl.enter="showOutput" @keydown.native.tab.prevent="addSpaces($event.target)"></app-html>
           <app-css :newCss='c' @onCSS='cssAdded = $event' @keyup.native.ctrl.enter="showOutput" @keydown.native.tab.prevent="addSpaces($event.target)"></app-css>
-          <app-js :newJs='j' @onJS='jsAdded = $event' @keyup.native.ctrl.enter="showOutput" @keydown.native.tab.prevent="addSpaces($event.target)"></app-js> -->
+          <app-js :newJs='j' @onJS='jsAdded = $event' @keyup.native.ctrl.enter="showOutput" @keydown.native.tab.prevent="addSpaces($event.target)"></app-js>
         </div>
         <div class="col-12 col-lg-6 px-0 pr-lg-0 pl-lg-1">
           <app-render>
@@ -25,7 +43,7 @@
           </app-render>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -124,7 +142,6 @@
   html, body {
     position: relative;
     height: 100%;
-    overflow: hidden;
   } 
   .bg-work {
     background: $work;
