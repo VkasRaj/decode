@@ -188,4 +188,5 @@
     letter-spacing: .1rem;
   }
   @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+  @import url('../node_modules/highlight.js/styles/atom-one-dark.css');
 </style>
