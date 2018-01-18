@@ -1,8 +1,20 @@
-import Vue from 'vue'
-import App from './App.vue'
+// Vue Imports ==============
+import Vue from 'vue';
 
-import Editor from "./components/editor/Editor.vue";
+// Third party libraries Imports ============
 import hljs from "highlight.js";
+
+// Vue Components Imports ============
+import App from './App.vue';
+import Editor from "./components/editor/Editor.vue";
+
+// Registering Vue Components ==========
+Vue.component('app-editor', Editor);
+
+// Registering Third party libraries ==========
+  // another way of registering (just for note purpose)
+  // Object.defineProperty(Vue.prototype, '$syntax', { value: hljs });
+Vue.prototype.$hljs = hljs;
 
 export const eBus = new Vue({
   data : {
@@ -16,10 +28,7 @@ export const eBus = new Vue({
   }
 });
 
-Vue.component('app-editor', Editor);
-Vue.prototype.$hljs = hljs;
-// Object.defineProperty(Vue.prototype, '$syntax', { value: hljs });
-
+// Vue Global Directives =============
 Vue.directive('syntax-highlight', {
   bind(el, binding) {
     if (typeof binding.value === 'undefined') {
