@@ -5,9 +5,12 @@
     </div>
     <div class="workspace d-flex flex-wrap flex-grow">
       <div class="col-12 col-md-6 px-0 pl-lg-0 pr-lg-1">
-        <app-editor :name="'html'"></app-editor>
-        <app-editor :name="'css'"></app-editor>
-        <app-editor :name="'js'"></app-editor>
+        <app-editor :name="'html'" @code="onReceivedCode(htmlCode = $event)"></app-editor>
+        <app-editor :name="'css'" @code="onReceivedCode(cssCode = $event)"></app-editor>
+        <app-editor :name="'js'" @code="onReceivedCode(jsCode = $event)"></app-editor>
+        <!-- <app-editor :name="'html'" @code="htmlCode = $event" @onSendCode="onReceivedCode($event)"></app-editor>
+        <app-editor :name="'css'" @code="cssCode = $event" @onSendCode="onReceivedCode($event)"></app-editor>
+        <app-editor :name="'js'" @code="jsCode = $event" @onSendCode="onReceivedCode($event)"></app-editor> -->
       </div>
       <div class="col-12 col-md-6 px-0 pr-lg-0 pl-lg-1">
         <app-render>
@@ -58,6 +61,9 @@
   export default {
     data() {
       return {
+        htmlCode: '',
+        cssCode: '',
+        jsCode: '',
         htmlAdded: '',
         cssAdded: '',
         jsAdded: '',
@@ -74,12 +80,12 @@
       appJs: JS
     },
     methods: {
-      setStorage(key, value) {
-        sessionStorage.setItem(key, value);
-      },
-      getStorage(key) {
-        return sessionStorage.getItem(key);
-      },
+      // setStorage(key, value) {
+      //   sessionStorage.setItem(key, value);
+      // },
+      // getStorage(key) {
+      //   return sessionStorage.getItem(key);
+      // },
       showOutput() {
         eBus.onSave(true);
         if (this.htmlAdded === 'null') {
@@ -96,33 +102,36 @@
         this.setStorage('cssStorage', this.cssAdded);
         this.setStorage('jsStorage', this.jsAdded);
       },
-      addSpaces(target) {
-        let spaces = (' ').repeat(4);
-        let curPos = target.selectionStart;
-        let endPos = target.selectionEnd;
-        target.value = (target.value).substr(0, curPos) + spaces + (target.value).substr(endPos, target.value.length);
-        target.selectionEnd = curPos + spaces.length;
+      // addSpaces(target) {
+      //   let spaces = (' ').repeat(4);
+      //   let curPos = target.selectionStart;
+      //   let endPos = target.selectionEnd;
+      //   target.value = (target.value).substr(0, curPos) + spaces + (target.value).substr(endPos, target.value.length);
+      //   target.selectionEnd = curPos + spaces.length;
+      // },
+      onReceivedCode(code) {
+        console.log(this.htmlCode, this.cssCode, this.jsCode);
       }
     },
     mounted() {
-      this.h = this.getStorage('htmlStorage');
-      this.c = this.getStorage('cssStorage');
-      this.j = this.getStorage('jsStorage');
-      this.htmlAdded = this.h;
-      this.cssAdded = this.c;
-      this.jsAdded = this.j;
-      if (sessionStorage.length) {
-        if (this.h === 'null') {
-          this.h = '';
-        }
-        if (this.c === 'null') {
-          this.c = '';
-        }
-        if (this.j === 'null') {
-          this.j = '';
-        }
-        this.$refs.iframe.srcdoc = `${this.h}<style>${this.c}</style><script>${this.j}<\/script>`;
-      }
+      // this.h = this.getStorage('htmlStorage');
+      // this.c = this.getStorage('cssStorage');
+      // this.j = this.getStorage('jsStorage');
+      // this.htmlAdded = this.h;
+      // this.cssAdded = this.c;
+      // this.jsAdded = this.j;
+      // if (sessionStorage.length) {
+      //   if (this.h === 'null') {
+      //     this.h = '';
+      //   }
+      //   if (this.c === 'null') {
+      //     this.c = '';
+      //   }
+      //   if (this.j === 'null') {
+      //     this.j = '';
+      //   }
+      //   this.$refs.iframe.srcdoc = `${this.h}<style>${this.c}</style><script>${this.j}<\/script>`;
+      // }
     }
   }
 </script>

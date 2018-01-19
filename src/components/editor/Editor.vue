@@ -26,11 +26,12 @@ export default {
     },
     watch : {
         'code'(newCode) {
-            // console.log(newCode);
+            this.$emit('code', newCode);
         }
     },
     methods : {
         sendCode() {
+            this.$emit('onSendCode', this.code);
             // console.log(this.code);
         }
     }
