@@ -5,17 +5,17 @@
     </div>
     <div class="workspace d-flex flex-wrap flex-grow">
       <div class="col-12 col-md-6 px-0 pl-lg-0 pr-lg-1">
-        <app-editor :name="'html'" @code="onReceivedCode(htmlCode = $event)"></app-editor>
+        <!-- <app-editor :name="'html'" @code="onReceivedCode(htmlCode = $event)"></app-editor>
         <app-editor :name="'css'" @code="onReceivedCode(cssCode = $event)"></app-editor>
-        <app-editor :name="'js'" @code="onReceivedCode(jsCode = $event)"></app-editor>
-        <!-- <app-editor :name="'html'" @code="htmlCode = $event" @onSendCode="onReceivedCode($event)"></app-editor>
+        <app-editor :name="'js'" @code="onReceivedCode(jsCode = $event)"></app-editor> -->
+        <app-editor :name="'html'" @code="htmlCode = $event" @onSendCode="onReceivedCode($event)"></app-editor>
         <app-editor :name="'css'" @code="cssCode = $event" @onSendCode="onReceivedCode($event)"></app-editor>
-        <app-editor :name="'js'" @code="jsCode = $event" @onSendCode="onReceivedCode($event)"></app-editor> -->
+        <app-editor :name="'js'" @code="jsCode = $event" @onSendCode="onReceivedCode($event)"></app-editor>
       </div>
       <div class="col-12 col-md-6 px-0 pr-lg-0 pl-lg-1">
         <app-render>
           <template slot="iframe">
-            <iframe src="" frameborder="0" class="bg-white w-100" ref="iframe" srcdoc=""></iframe>
+            <iframe src="" frameborder="0" class="bg-white w-100 h-100" :srcdoc="output"></iframe>
           </template>
         </app-render>
       </div>
@@ -69,7 +69,8 @@
         jsAdded: '',
         h : '',
         c : '',
-        j : ''
+        j : '',
+        output: ''
       }
     },
     components: {
@@ -97,10 +98,11 @@
         if (this.jsAdded === 'null') {
           this.jsAdded = '';
         }
-        this.$refs.iframe.srcdoc = `${this.htmlAdded}<style>${this.cssAdded}</style><script>${this.jsAdded}<\/script>`;
-        this.setStorage('htmlStorage', this.htmlAdded);
-        this.setStorage('cssStorage', this.cssAdded);
-        this.setStorage('jsStorage', this.jsAdded);
+        this.output = this.htmlCode+`<style>${this.cssCode}</style><script>${this.jsCode}<\/script>`;
+        // this.$refs.iframe.srcdoc = `${this.htmlAdded}<style>${this.cssAdded}</style><script>${this.jsAdded}<\/script>`;
+        // this.setStorage('htmlStorage', this.htmlAdded);
+        // this.setStorage('cssStorage', this.cssAdded);
+        // this.setStorage('jsStorage', this.jsAdded);
       },
       // addSpaces(target) {
       //   let spaces = (' ').repeat(4);
@@ -110,7 +112,8 @@
       //   target.selectionEnd = curPos + spaces.length;
       // },
       onReceivedCode(code) {
-        console.log(this.htmlCode, this.cssCode, this.jsCode);
+        this.output = this.htmlCode+`<style>${this.cssCode}</style><script>${this.jsCode}<\/script>`;
+        // console.log(this.htmlCode, this.cssCode, this.jsCode);
       }
     },
     mounted() {
@@ -151,6 +154,7 @@
   html, body {
     position: relative;
     height: 100%;
+    overflow: hidden;
   } 
   .bg-work {
     background: $work;
@@ -193,8 +197,10 @@
     top: .5rem;
     right: .5rem;
   }
-  .ltr-space {
-    letter-spacing: .1rem;
+  @for $i from 1 through 5 {
+    .letter-spacing-#{$i} {
+      letter-spacing: #{.1*$i}rem;
+    }
   }
   @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
   @import url('../node_modules/highlight.js/styles/atom-one-dark.css');

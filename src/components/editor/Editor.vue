@@ -1,8 +1,14 @@
 <template>
     <div class="editor">
         <div class="workarea-wrapper position-relative h-100">
-            <textarea name="" class="editor-textarea text-white p-2 consolas position-absolute h-100 w-100 border border-white" spellcheck="false" v-model="code" @keyup.ctrl="sendCode"></textarea>
-            <pre class="bg-work h-100 m-0 border border-white" v-syntax-highlight="code"><code class="consolas p-2 w-100" ref="codeView" :class="name"></code></pre>
+            <textarea name="" 
+                class="editor-textarea text-white p-2 consolas position-absolute h-100 w-100 border border-white" 
+                spellcheck="false" 
+                v-model="code" 
+                @keyup.ctrl.enter="sendCode"></textarea>
+            <pre 
+                class="bg-work h-100 m-0 border border-white" 
+                v-syntax-highlight="code"><code class="consolas p-2 w-100" ref="codeView" :class="name"></code></pre>
             <small class="text-secondary lang-title text-uppercase">{{ name }}</small>
             <!-- <div class="html-setting pointer">
                 <app-setting-icon></app-setting-icon>
