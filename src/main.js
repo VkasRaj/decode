@@ -8,6 +8,9 @@ import hljs from "highlight.js";
 import App from './App.vue';
 import Editor from "./components/editor/Editor.vue";
 
+// Vue Components Imports ============
+import { SyntaxHighlight } from "./directive/SyntaxHighlight";
+
 // Registering Vue Components ==========
 Vue.component('app-editor', Editor);
 
@@ -28,31 +31,10 @@ export const eBus = new Vue({
   }
 });
 
-// Vue Global Directives =============
-Vue.directive('syntax-highlight', {
-  bind(el, binding) {
-    if (typeof binding.value === 'undefined') {
-      throw "Missing Value: You have to provide value to be highlighted!";
-    }
-    let targets = el.querySelectorAll('code');
-    targets.forEach(target => {
-      target.textContent = binding.value;
-      hljs.highlightBlock(target);
-    });
-  },
-  componentUpdated(el, binding) {
-    if (typeof binding.value === 'undefined') {
-      throw "Missing Value: You have to provide value to be highlighted!";
-    }
-    let targets = el.querySelectorAll('code');
-    targets.forEach(target => {
-      target.textContent = binding.value;
-      hljs.highlightBlock(target);
-    });
-  }
-})
-
 new Vue({
   el: '#app',
+  directives: {
+    SyntaxHighlight
+  },
   render: h => h(App)
 })
