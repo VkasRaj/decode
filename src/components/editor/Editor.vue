@@ -1,19 +1,6 @@
 <template>
-    <div class="editor">
-        <div class="workarea-wrapper position-relative h-100">
-            <textarea name="" 
-                class="editor-textarea text-white p-2 consolas position-absolute h-100 w-100 border border-white" 
-                spellcheck="false" 
-                v-model="code" 
-                @keyup.ctrl.enter="sendCode"></textarea>
-            <pre 
-                class="bg-work h-100 m-0 border border-white" 
-                v-syntax-highlight="code"><code class="consolas p-2 w-100" ref="codeView" :class="name"></code></pre>
-            <small class="text-secondary lang-title text-uppercase">{{ name }}</small>
-            <!-- <div class="html-setting pointer">
-                <app-setting-icon></app-setting-icon>
-            </div> -->
-        </div>
+    <div class="editor w-100">
+        <textarea ref="codeTextarea"></textarea>
     </div>
 </template>
 
@@ -27,37 +14,69 @@ export default {
     },
     data() {
         return {
-            code: ''
+            codeTextarea : null,
+            codeTextareaValue : null
         }
     },
-    watch : {
-        'code'(newCode) {
-            this.$emit('code', newCode);
-        }
-    },
-    methods : {
-        sendCode() {
-            this.$emit('onSendCode', this.code);
-            // console.log(this.code);
-        }
+    mounted() {
+        this.codeTextarea = this.$codemirror.fromTextArea(this.$refs.codeTextarea, {
+            lineNumbers: true,
+            mode: this.name,
+            theme: 'dracula'
+        })
+        this.codeTextarea.on('change', (instance, change) => {
+            this.codeTextareaValue = instance.getValue();
+            this.$emit('code', this.codeTextareaValue);
+        })
+        this.codeTextarea.on('keydown', (instance, event) => {
+            if (event.ctrlKey && event.key === 'Enter' && event.keyCode === 13) {
+                this.$emit('onSendCode')
+            }
+        })
     }
 }
 </script>
-
 <style lang="scss" scoped>
+    $body: #21252b;
+    $work: #282c34;
+    $light: #868e96;
+    
     .consolas {
         font-family: 'Consolas';
     }
-    textarea {
-        background: transparent !important;
-        z-index: 2;
-        font-size: .95rem;
-        text-fill-color: transparent !important;
-        -webkit-text-fill-color: transparent !important;
-    }
+    // textarea {
+    //     background: transparent !important;
+    //     z-index: 2;
+    //     font-size: .95rem;
+    //     text-fill-color: transparent !important;
+    //     -webkit-text-fill-color: transparent !important;
+    // }
     pre, code {
         word-wrap: break-word;
         white-space: pre-wrap;
         font-size: .95rem;
+    }
+    .editor {
+        height: calc(100 / 3 * 1%) !important;
+        // textarea {
+        // border: none;
+        // outline: none;
+        // padding: .5rem .8rem;
+        // resize: none;
+        // }
+        & small.lang-title {
+        position: absolute;
+        right: .5rem;
+        bottom: .5rem;
+        z-index: 100;
+        }
+    }
+    .setting {
+        background: $body;
+        height: 1.5rem;
+        width: 1.5rem;
+        position: absolute;
+        top: .5rem;
+        right: .5rem;
     }
 </style>
