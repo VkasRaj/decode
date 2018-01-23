@@ -5,9 +5,6 @@
     </div>
     <div class="workspace d-flex flex-wrap flex-grow">
       <div class="col-12 col-md-6 px-0 pl-lg-0 pr-lg-1">
-        <!-- <app-editor :name="'html'" @code="onReceivedCode(htmlCode = $event)"></app-editor>
-        <app-editor :name="'css'" @code="onReceivedCode(cssCode = $event)"></app-editor>
-        <app-editor :name="'js'" @code="onReceivedCode(jsCode = $event)"></app-editor> -->
         <app-editor :name="'html'" @code="htmlCode = $event" @onSendCode="onReceivedCode($event)"></app-editor>
         <app-editor :name="'css'" @code="cssCode = $event" @onSendCode="onReceivedCode($event)"></app-editor>
         <app-editor :name="'js'" @code="jsCode = $event" @onSendCode="onReceivedCode($event)"></app-editor>
@@ -28,8 +25,6 @@ export default {
       jsCode: '',
       output: ''
     }
-  },
-  watch: {
   },
   methods: {
     onReceivedCode() {

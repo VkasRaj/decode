@@ -1,6 +1,7 @@
 <template>
-    <div class="editor w-100">
+    <div class="editor w-100 position-relative">
         <textarea ref="codeTextarea"></textarea>
+        <small class="lang-title text-uppercase position-absolute">{{ name }}</small>
     </div>
 </template>
 
@@ -44,13 +45,6 @@ export default {
     .consolas {
         font-family: 'Consolas';
     }
-    // textarea {
-    //     background: transparent !important;
-    //     z-index: 2;
-    //     font-size: .95rem;
-    //     text-fill-color: transparent !important;
-    //     -webkit-text-fill-color: transparent !important;
-    // }
     pre, code {
         word-wrap: break-word;
         white-space: pre-wrap;
@@ -58,17 +52,11 @@ export default {
     }
     .editor {
         height: calc(100 / 3 * 1%) !important;
-        // textarea {
-        // border: none;
-        // outline: none;
-        // padding: .5rem .8rem;
-        // resize: none;
-        // }
         & small.lang-title {
-        position: absolute;
-        right: .5rem;
-        bottom: .5rem;
-        z-index: 100;
+            color: $light;
+            right: .5rem;
+            bottom: .5rem;
+            z-index: 100;
         }
     }
     .setting {
