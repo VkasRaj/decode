@@ -8,28 +8,13 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <small>
-              <a href="#0" class="nav-link text-uppercase text-white letter-spacing-2">
-                <!-- <svg v-if="saved" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114.5 83.27" style="fill: #fff;" width=".7rem"><title>done</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><polygon id="done_mini-_1484_" data-name="done_mini-[#1484]" points="114.5 16.66 44.05 83.27 44.04 83.26 44.04 83.27 0 41.64 17.61 24.98 44.04 49.96 96.89 0 114.5 16.66"/></g></g></svg> -->
-                <!-- <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="fill: #fff;" width=".6rem"><title>to be done</title><circle cx="50" cy="50" r="50"/></svg> -->
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114.5 83.27" style="fill: #fff;" width=".7rem"><title>done</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><polygon id="done_mini-_1484_" data-name="done_mini-[#1484]" points="114.5 16.66 44.05 83.27 44.04 83.26 44.04 83.27 0 41.64 17.61 24.98 44.04 49.96 96.89 0 114.5 16.66"/></g></g></svg>
+              <a href="#0" class="nav-link text-uppercase text-white letter-spacing-2" @click="onSaved">
+                <svg v-if="saved" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114.5 83.27" style="fill: #fff;" width=".7rem"><title>done</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><polygon id="done_mini-_1484_" data-name="done_mini-[#1484]" points="114.5 16.66 44.05 83.27 44.04 83.26 44.04 83.27 0 41.64 17.61 24.98 44.04 49.96 96.89 0 114.5 16.66"/></g></g></svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="fill: #fff;" width=".6rem"><title>to be done</title><circle cx="50" cy="50" r="50"/></svg>
                 save
               </a>
             </small>
-            <!-- <button  
-              class="btn btn-light btn-sm text-uppercase badge-pill text-dark d-flex align-items-center justify-content-around pointer" 
-              @click="onSaveShowOutput">
-              <svg v-if="saved" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114.5 83.27" width=".9rem"><title>done</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><polygon id="done_mini-_1484_" data-name="done_mini-[#1484]" points="114.5 16.66 44.05 83.27 44.04 83.26 44.04 83.27 0 41.64 17.61 24.98 44.04 49.96 96.89 0 114.5 16.66" style="fill:#21252b"/></g></g></svg>
-              
-              <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width=".8rem"><title>to be done</title><circle cx="50" cy="50" r="50" style="fill:#21252b"/></svg>
-
-              <span class="ml-2 mr-1 ltr-space">Save</span>
-            </button> -->
           </li>
-          <!-- <li class="nav-item nav-link">
-            <button class="bg-transparent border-0 pointer px-1" type="button" data-toggle="collapse" data-target="#decoderNavbar">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </li> -->
         </ul>
       </div>
     </nav>
@@ -38,22 +23,21 @@
 
 <script>
   export default {
-    data() {
-      return {
-        // saved : eBus.saved,
-        // setting : eBus.setting
+    props: {
+      saved: {
+        type: Boolean,
+        required: true
       }
     },
-    methods : {
-    //   onSaveShowOutput() {
-    //     this.$emit('upOnSave');
-    //   }
+    data() {
+      return {
+      }
     },
-    // created() {
-    //   eBus.$on('uponSave', param => {
-    //     this.saved = param;
-    //   })
-    // }
+    methods: {
+      onSaved() {
+        this.$emit('savedClicked', true)
+      }
+    }
   }
 </script>
 
