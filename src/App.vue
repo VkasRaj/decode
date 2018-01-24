@@ -5,7 +5,12 @@
     </div>
     <div class="workspace d-flex flex-wrap flex-grow">
       <div class="col-12 col-md-6 px-0 pl-lg-0 pr-lg-1">
-        <app-editor 
+        <app-editor v-for="(editor, index) in editors" :key="editor.name"
+          :name="editor.name" 
+          @code="onRecieveCode($event, index)" 
+          @onSendCode="onShowOutput($event)"
+          :cmMode="editor.mode"></app-editor>
+        <!-- <app-editor 
           :name="'html'" 
           @code="htmlCode = $event" 
           @onSendCode="onShowOutput($event)"
@@ -19,7 +24,7 @@
           :name="'js'" 
           @code="jsCode = $event"
           @onSendCode="onShowOutput($event)"
-          :cmMode="'text/javascript'"></app-editor>
+          :cmMode="'text/javascript'"></app-editor> -->
       </div>
       <div class="col-12 col-md-6 px-0 pr-lg-0 pl-lg-1">
         <app-render :output="output"></app-render>
@@ -32,6 +37,11 @@
 export default {
   data() {
     return {
+      editors: [
+        { name: 'html', mode: 'text/xml' },
+        { name: 'css', mode: 'text/css' },
+        { name: 'js', mode: 'text/javascript' },
+      ],
       htmlCode: '',
       cssCode: '',
       jsCode: '',
@@ -42,6 +52,15 @@ export default {
   methods: {
     onShowOutput() {
       this.output = `<head><style>${this.cssCode}</style></head> ${this.htmlCode}<script>${this.jsCode}<\/script>`;
+    },
+    onRecieveCode(code, index) {
+      if (index === 0) {
+        this.htmlCode = code;
+      } else if (index === 1) {
+        this.cssCode = code;
+      } else if (index === 2) {
+        this.jsCode = code;
+      }
     }
   }
 }
