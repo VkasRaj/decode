@@ -6,29 +6,38 @@
 </template>
 
 <script>
+import "../../../node_modules/codemirror/mode/xml/xml.js";
+import "../../../node_modules/codemirror/mode/css/css.js";
+import "../../../node_modules/codemirror/mode/javascript/javascript.js";
+
 export default {
     props: {
         name : {
             type: String,
             required: true
+        },
+        cmMode: {
+            type: String
         }
     },
     data() {
         return {
             codeTextarea : null,
-            codeTextareaValue : null
         }
     },
     mounted() {
         this.codeTextarea = this.$codemirror.fromTextArea(this.$refs.codeTextarea, {
             lineNumbers: true,
-            mode: this.name,
+            mode: {
+                name: this.cmMode,
+            },
             theme: 'dracula'
         })
+
         this.codeTextarea.on('change', (instance, change) => {
-            this.codeTextareaValue = instance.getValue();
-            this.$emit('code', this.codeTextareaValue);
+            this.$emit('code', instance.getValue());
         })
+        
         this.codeTextarea.on('keydown', (instance, event) => {
             if (event.ctrlKey && event.key === 'Enter' && event.keyCode === 13) {
                 this.$emit('onSendCode')

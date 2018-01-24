@@ -5,9 +5,21 @@
     </div>
     <div class="workspace d-flex flex-wrap flex-grow">
       <div class="col-12 col-md-6 px-0 pl-lg-0 pr-lg-1">
-        <app-editor :name="'html'" @code="htmlCode = $event" @onSendCode="onShowOutput($event)"></app-editor>
-        <app-editor :name="'css'" @code="cssCode = $event" @onSendCode="onShowOutput($event)"></app-editor>
-        <app-editor :name="'js'" @code="jsCode = $event" @onSendCode="onShowOutput($event)"></app-editor>
+        <app-editor 
+          :name="'html'" 
+          @code="htmlCode = $event" 
+          @onSendCode="onShowOutput($event)"
+          :cmMode="'text/xml'"></app-editor>
+        <app-editor 
+          :name="'css'"
+          @code="cssCode = $event" 
+          @onSendCode="onShowOutput($event)"
+          :cmMode="'text/css'"></app-editor>
+        <app-editor 
+          :name="'js'" 
+          @code="jsCode = $event"
+          @onSendCode="onShowOutput($event)"
+          :cmMode="'text/javascript'"></app-editor>
       </div>
       <div class="col-12 col-md-6 px-0 pr-lg-0 pl-lg-1">
         <app-render :output="output"></app-render>
