@@ -1,39 +1,26 @@
 <template>
   <div id="app" class="d-flex flex-column h-100">
     <div class="header">
-      <app-header :saved="saved" @savedClicked="onShowOutput"></app-header>
+      <app-header @clicked="onShowOutput"></app-header>
     </div>
     <div class="workspace d-flex flex-wrap flex-grow">
       <div class="col-12 col-md-6 px-0 pl-lg-0 pr-lg-1">
-        <app-editor v-for="(editor, index) in editors" :key="editor.name"
+        <app-editor v-for="editor in editors" :key="editor.name"
           :name="editor.name" 
-          @code="onRecieveCode($event, index)" 
-          @onSendCode="onShowOutput($event)"
+          @code="onRecieveCode($event, editor.name)" 
+          @onSendCode="onShowOutput"
           :cmMode="editor.mode"></app-editor>
-        <!-- <app-editor 
-          :name="'html'" 
-          @code="htmlCode = $event" 
-          @onSendCode="onShowOutput($event)"
-          :cmMode="'text/xml'"></app-editor>
-        <app-editor 
-          :name="'css'"
-          @code="cssCode = $event" 
-          @onSendCode="onShowOutput($event)"
-          :cmMode="'text/css'"></app-editor>
-        <app-editor 
-          :name="'js'" 
-          @code="jsCode = $event"
-          @onSendCode="onShowOutput($event)"
-          :cmMode="'text/javascript'"></app-editor> -->
       </div>
       <div class="col-12 col-md-6 px-0 pr-lg-0 pl-lg-1">
-        <app-render :output="output"></app-render>
+        <app-render></app-render>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -41,25 +28,31 @@ export default {
         { name: 'html', mode: 'text/xml' },
         { name: 'css', mode: 'text/css' },
         { name: 'js', mode: 'text/javascript' },
-      ],
-      htmlCode: '',
-      cssCode: '',
-      jsCode: '',
-      output: '',
-      saved: true
+      ]
     }
+  },
+  computed: {
+    ...mapState([
+      'htmlCode',
+      'cssCode',
+      'jsCode',
+      'output',
+    ])
   },
   methods: {
     onShowOutput() {
-      this.output = `<head><style>${this.cssCode}</style></head> ${this.htmlCode}<script>${this.jsCode}<\/script>`;
+      let output = `<head><style>${this.cssCode}</style></head> ${this.htmlCode}<script>${this.jsCode}<\/script>`;
+      this.$store.dispatch('showOutput', output);
     },
-    onRecieveCode(code, index) {
-      if (index === 0) {
-        this.htmlCode = code;
-      } else if (index === 1) {
-        this.cssCode = code;
-      } else if (index === 2) {
-        this.jsCode = code;
+    onRecieveCode(code, name) {
+      this.$store.commit('setSaved', false);
+
+      if (name === 'html') {
+        this.$store.commit('setHtmlCode', code);
+      } else if (name === 'css') {
+        this.$store.commit('setCssCode', code);
+      } else if (name === 'js') {
+        this.$store.commit('setJsCode', code)
       }
     }
   }

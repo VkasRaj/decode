@@ -1,5 +1,6 @@
 // Vue Imports ==============
 import Vue from 'vue';
+import { store } from "./store/store";
 
 // Third party libraries Imports ============
 import Cm from 'codemirror';
@@ -27,6 +28,7 @@ Vue.component('app-render', Render);
 
 new Vue({
   el: '#app',
+  store,
   directives: {
     // Codemirror
   },
