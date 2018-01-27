@@ -1,14 +1,14 @@
 <template>
   <div id="app" class="d-flex flex-column h-100">
     <div class="header">
-      <app-header @clicked="onShowOutput"></app-header>
+      <app-header></app-header>
     </div>
     <div class="workspace d-flex flex-wrap flex-grow">
       <div class="col-12 col-md-6 px-0 pl-lg-0 pr-lg-1">
         <app-editor v-for="editor in editors" :key="editor.name"
           :name="editor.name" 
-          @code="onRecieveCode($event, editor.name)" 
-          @onSendCode="onShowOutput"
+          @changed="onRecieveCode($event, editor.name)" 
+          @keyup.native.exact.ctrl.enter="showOutput"
           :cmMode="editor.mode"></app-editor>
       </div>
       <div class="col-12 col-md-6 px-0 pr-lg-0 pl-lg-1">
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   data() {
@@ -40,10 +40,9 @@ export default {
     ])
   },
   methods: {
-    onShowOutput() {
-      let output = `<head><style>${this.cssCode}</style></head> ${this.htmlCode}<script>${this.jsCode}<\/script>`;
-      this.$store.dispatch('showOutput', output);
-    },
+    ...mapActions([
+      'showOutput'
+    ]),
     onRecieveCode(code, name) {
       this.$store.commit('setSaved', false);
 

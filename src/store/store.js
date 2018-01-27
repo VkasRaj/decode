@@ -11,23 +11,6 @@ export const store = new Vuex.Store({
         output: '',
         saved: true
     },
-    getters: {
-        // getHtmlCode(state) {
-        //     return state.htmlCode;
-        // },
-        // getCssCode(state) {
-        //     return state.cssCode;
-        // },
-        // getJsCode(state) {
-        //     return state.jsCode;
-        // },
-        // getOutput(state) {
-        //     return state.output;
-        // },
-        // getSaved(state) {
-        //     return state.saved;
-        // }
-    },
     mutations: {
         setHtmlCode(state, payload) {
             state.htmlCode = payload;
@@ -46,8 +29,19 @@ export const store = new Vuex.Store({
         }
     },
     actions: {
-        showOutput(context, payload) {
-            context.commit('setOutput', payload);
+        showOutput(context) {
+            let output = `<head>
+                            <style>
+                                ${context.state.cssCode}
+                            </style>
+                        </head>
+                        <body>
+                            ${context.state.htmlCode}
+                            <script>
+                                ${context.state.jsCode}
+                            </script>
+                        </body>`
+            context.commit('setOutput', output);
             context.commit('setSaved', true);
         }
     }

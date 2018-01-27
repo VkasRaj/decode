@@ -35,13 +35,7 @@ export default {
         })
 
         this.codeTextarea.on('change', (instance, change) => {
-            this.$emit('code', instance.getValue());
-        })
-        
-        this.codeTextarea.on('keydown', (instance, event) => {
-            if (event.ctrlKey && event.key === 'Enter' && event.keyCode === 13) {
-                this.$emit('onSendCode')
-            }
+            this.$emit('changed', instance.getValue());
         })
     }
 }
