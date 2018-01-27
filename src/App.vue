@@ -1,80 +1,20 @@
 <template>
   <div id="app" class="d-flex flex-column h-100">
-    <div class="header">
-      <app-header></app-header>
-    </div>
-    <div class="workspace d-flex flex-wrap flex-grow">
-      <div class="col-12 col-md-6 px-0 pl-lg-0 pr-lg-1">
-        <app-editor v-for="editor in editors" :key="editor.name"
-          :name="editor.name"
-          :value="editor.value"
-          @changed="onRecieveCode($event, editor.name)"
-          @keyup.native.exact.ctrl.enter="showOutput"
-          :cmMode="editor.mode"></app-editor>
-      </div>
-      <div class="col-12 col-md-6 px-0 pr-lg-0 pl-lg-1">
-        <app-render></app-render>
-      </div>
-    </div>
+    <app-header />
+    <app-cockpit />
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import Cockpit from "./components/cockpit/Cockpit.vue";
+
+import "../node_modules/codemirror/mode/xml/xml.js";
+import "../node_modules/codemirror/mode/css/css.js";
+import "../node_modules/codemirror/mode/javascript/javascript.js";
 
 export default {
-  data() {
-    return {
-      editors: null
-    }
-  },
-  computed: {
-    ...mapState([
-      'htmlCode',
-      'cssCode',
-      'jsCode'
-    ])
-  },
-  methods: {
-    ...mapMutations([
-      'setSaved',
-      'setHtmlCode',
-      'setCssCode',
-      'setJsCode'
-    ]),
-    ...mapActions([
-      'showOutput',
-      'getCodeFromStorage',
-    ]),
-    onRecieveCode(code, name) {
-      this.setSaved(false);
-      if (name === 'html') {
-        this.setHtmlCode(code);
-      } else if (name === 'css') {
-        this.setCssCode(code);
-      } else if (name === 'js') {
-        this.setJsCode(code);
-      }
-    }
-  },
-  created() {
-    this.getCodeFromStorage();
-    this.editors = [
-      {
-        name: 'html',
-        mode: 'text/xml',
-        value: this.htmlCode
-      }, { 
-        name: 'css',
-        mode: 'text/css',
-        value: this.cssCode
-      }, { 
-        name: 'js',
-        mode: 'text/javascript',
-        value: this.jsCode
-      },
-    ]
-    this.showOutput();
+  components: {
+    appCockpit: Cockpit
   }
 }
 </script>

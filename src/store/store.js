@@ -11,17 +11,6 @@ export const store = new Vuex.Store({
         output: null,
         saved: true
     },
-    getters: {
-        getHtml(state) {
-            return state.htmlCode;
-        },
-        getCss(state) {
-            return state.cssCode;
-        },
-        getJs(state) {
-            return state.jsCode;
-        }
-    },
     mutations: {
         setHtmlCode(state, payload) {
             state.htmlCode = payload;
