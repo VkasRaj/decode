@@ -3,7 +3,6 @@ import Vue from 'vue';
 import { store } from "./store/store";
 
 // Third party libraries Imports ============
-import Cm from 'codemirror';
 
 // Vue Components Imports ============
 import App from './App.vue';
@@ -24,8 +23,5 @@ Vue.component('app-header', Header);
 new Vue({
   el: '#app',
   store,
-  directives: {
-    // Codemirror
-  },
   render: h => h(App)
 })
