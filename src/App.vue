@@ -6,8 +6,9 @@
     <div class="workspace d-flex flex-wrap flex-grow">
       <div class="col-12 col-md-6 px-0 pl-lg-0 pr-lg-1">
         <app-editor v-for="editor in editors" :key="editor.name"
-          :name="editor.name" 
-          @changed="onRecieveCode($event, editor.name)" 
+          :name="editor.name"
+          :value="editor.value"
+          @changed="onRecieveCode($event, editor.name)"
           @keyup.native.exact.ctrl.enter="showOutput"
           :cmMode="editor.mode"></app-editor>
       </div>
@@ -19,41 +20,61 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   data() {
     return {
-      editors: [
-        { name: 'html', mode: 'text/xml' },
-        { name: 'css', mode: 'text/css' },
-        { name: 'js', mode: 'text/javascript' },
-      ]
+      editors: null
     }
   },
   computed: {
     ...mapState([
       'htmlCode',
       'cssCode',
-      'jsCode',
-      'output',
+      'jsCode'
     ])
   },
   methods: {
+    ...mapMutations([
+      'setSaved',
+      'setHtmlCode',
+      'setCssCode',
+      'setJsCode'
+    ]),
     ...mapActions([
-      'showOutput'
+      'showOutput',
+      'getCodeFromStorage',
     ]),
     onRecieveCode(code, name) {
-      this.$store.commit('setSaved', false);
-
+      this.setSaved(false);
       if (name === 'html') {
-        this.$store.commit('setHtmlCode', code);
+        this.setHtmlCode(code);
       } else if (name === 'css') {
-        this.$store.commit('setCssCode', code);
+        this.setCssCode(code);
       } else if (name === 'js') {
-        this.$store.commit('setJsCode', code)
+        this.setJsCode(code);
       }
     }
+  },
+  created() {
+    this.getCodeFromStorage();
+    this.editors = [
+      {
+        name: 'html',
+        mode: 'text/xml',
+        value: this.htmlCode
+      }, { 
+        name: 'css',
+        mode: 'text/css',
+        value: this.cssCode
+      }, { 
+        name: 'js',
+        mode: 'text/javascript',
+        value: this.jsCode
+      },
+    ]
+    this.showOutput();
   }
 }
 </script>

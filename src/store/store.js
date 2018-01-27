@@ -5,11 +5,22 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        htmlCode: '',
-        cssCode: '',
-        jsCode: '',
-        output: '',
+        htmlCode: null,
+        cssCode: null,
+        jsCode: null,
+        output: null,
         saved: true
+    },
+    getters: {
+        getHtml(state) {
+            return state.htmlCode;
+        },
+        getCss(state) {
+            return state.cssCode;
+        },
+        getJs(state) {
+            return state.jsCode;
+        }
     },
     mutations: {
         setHtmlCode(state, payload) {
@@ -29,20 +40,34 @@ export const store = new Vuex.Store({
         }
     },
     actions: {
-        showOutput(context) {
+        showOutput({ commit, state }) {
             let output = `<head>
                             <style>
-                                ${context.state.cssCode}
+                                ${state.cssCode}
                             </style>
                         </head>
                         <body>
-                            ${context.state.htmlCode}
+                            ${state.htmlCode}
                             <script>
-                                ${context.state.jsCode}
+                                ${state.jsCode}
                             </script>
-                        </body>`
-            context.commit('setOutput', output);
-            context.commit('setSaved', true);
+                        </body>`;
+
+            sessionStorage.html = state.htmlCode;
+            sessionStorage.css = state.cssCode;
+            sessionStorage.js = state.jsCode;
+
+            commit('setOutput', output);
+            commit('setSaved', true);
+        },
+        getCodeFromStorage({ commit }) {
+            let h = sessionStorage.getItem('html') || '';
+            let c = sessionStorage.getItem('css') || '';
+            let j = sessionStorage.getItem('js') || '';
+
+            commit('setHtmlCode', h);
+            commit('setCssCode', c);
+            commit('setJsCode', j);
         }
     }
 })

@@ -18,6 +18,7 @@ export default {
             type: String,
             required: true
         },
+        value: true,
         cmMode: {
             type: String
         }
@@ -35,7 +36,7 @@ export default {
             },
             theme: 'dracula'
         })
-
+        this.codeTextarea.setValue(this.value || '');
         this.codeTextarea.on('change', (instance, change) => {
             this.$emit('changed', instance.getValue());
         })
