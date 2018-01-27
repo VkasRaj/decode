@@ -23,7 +23,6 @@ Vue.component('app-render', Render);
   // another way of registering (just for note purpose)
   // Object.defineProperty(Vue.prototype, '$syntax', { value: hljs });
   // Vue.prototype.$hljs = hljs;
-  Vue.prototype.$codemirror = Cm;
 
 
 new Vue({

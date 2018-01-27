@@ -10,6 +10,8 @@ import "../../../node_modules/codemirror/mode/xml/xml.js";
 import "../../../node_modules/codemirror/mode/css/css.js";
 import "../../../node_modules/codemirror/mode/javascript/javascript.js";
 
+import { fromTextArea } from "codemirror";
+
 export default {
     props: {
         name : {
@@ -26,7 +28,7 @@ export default {
         }
     },
     mounted() {
-        this.codeTextarea = this.$codemirror.fromTextArea(this.$refs.codeTextarea, {
+        this.codeTextarea = fromTextArea(this.$refs.codeTextarea, {
             lineNumbers: true,
             mode: {
                 name: this.cmMode,
