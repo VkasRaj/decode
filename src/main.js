@@ -10,6 +10,7 @@ import Header from "./components/header/Header.vue";
 
 // Vue Directives Imports ============
 // import { Codemirror } from "./directive/Codemirror";
+import TabsDirective from './directive/Tabs';
 
 // Registering Vue Components ==========
 Vue.component('app-header', Header);
@@ -23,5 +24,8 @@ Vue.component('app-header', Header);
 new Vue({
   el: '#app',
   store,
+  directives: {
+    TabsDirective
+  },
   render: h => h(App)
 })

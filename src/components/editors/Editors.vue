@@ -73,3 +73,10 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    .editor {
+        height: calc(100 / 3 * 1%) !important;
+    }
+</style>
+
