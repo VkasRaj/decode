@@ -10,9 +10,9 @@
             <small>
               <a class="pointer nav-link text-uppercase text-white letter-spacing-1" 
                 @click="showOutput">
-                <svg v-if="saved" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114.5 83.27" style="fill: #fff;" width=".7rem"><title>done</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><polygon id="done_mini-_1484_" data-name="done_mini-[#1484]" points="114.5 16.66 44.05 83.27 44.04 83.26 44.04 83.27 0 41.64 17.61 24.98 44.04 49.96 96.89 0 114.5 16.66"/></g></g></svg>
+                <svg v-if="saved" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="fill: #fff;"  width=".6rem"><path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/></svg>
                 <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="fill: #fff;" width=".6rem"><title>to be done</title><circle cx="50" cy="50" r="50"/></svg>
-                save
+                <span>run</span>
               </a>
             </small>
           </li>
