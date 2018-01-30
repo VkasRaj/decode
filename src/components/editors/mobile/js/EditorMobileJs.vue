@@ -3,15 +3,21 @@
         <app-editor 
             :name="'js'" 
             @changed="setJsCode($event)"
-            :cmMode="'text/javascript'"></app-editor>
+            :cmMode="'text/javascript'"
+            :value="jsCode"></app-editor>
     </div>
 </template>
 
 <script>
 import Editor from "../../editor/Editor.vue";
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
+    computed: {
+        ...mapState([
+            'jsCode'
+        ])
+    },
     components: {
         appEditor: Editor
     },

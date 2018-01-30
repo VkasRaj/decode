@@ -3,15 +3,21 @@
         <app-editor 
             :name="'html'" 
             @changed="setHtmlCode($event)"
-            :cmMode="'text/xml'"></app-editor>
+            :cmMode="'text/xml'"
+            :value="htmlCode"></app-editor>
     </div>
 </template>
 
 <script>
 import Editor from "../../editor/Editor.vue";
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
+    computed: {
+        ...mapState([
+            'htmlCode'
+        ])
+    },
     components: {
         appEditor: Editor
     },

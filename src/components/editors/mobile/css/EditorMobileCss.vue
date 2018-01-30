@@ -3,15 +3,21 @@
         <app-editor 
             :name="'css'" 
             @changed="setCssCode($event)"
-            :cmMode="'text/css'"></app-editor>
+            :cmMode="'text/css'"
+            :value="cssCode"></app-editor>
     </div>
 </template>
 
 <script>
 import Editor from "../../editor/Editor.vue";
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
+    computed: {
+        ...mapState([
+            'cssCode'
+        ])
+    },
     components: {
         appEditor: Editor
     },

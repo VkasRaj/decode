@@ -46,7 +46,7 @@ export default {
             'showOutput',
         ])
     },
-    mounted() {
+    created() {
         this.getCodeFromStorage();
         this.showOutput();
     }
