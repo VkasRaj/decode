@@ -1,8 +1,8 @@
 <template>
-    <div v-show="isActive" 
+    <div v-if="isActive" 
         :id="title" 
         role="tabpanel" 
-        aria-labelledby="home-tab">
+        :aria-labelledby="title+'-tab'">
         <slot></slot>
     </div>
 </template>

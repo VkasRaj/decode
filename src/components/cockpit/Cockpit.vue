@@ -16,7 +16,7 @@
 
 <script>
 const EditorsMobile = () => import("../editors/mobile/EditorsMobile.vue");
-const Editors = () => import("../editors/Editors.vue");
+const Editors = () => import("../editors/desktop/Editors.vue");
 // import EditorsMobile from "../editors/mobile/EditorsMobile.vue";
 // import Editors from "../editors/Editors.vue";
 import Render from "../render/Render.vue";

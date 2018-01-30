@@ -1,46 +1,46 @@
 <template>
-    <div id="mobile-editor-wrapper" class="d-flex flex-column h-100">
-        <ul class="nav nav-tabs nav-fill">
-            <li class="nav-item" v-for="link in tabLinks" :key="link.name">
-                <small>
-                    <a 
-                    class="text-white nav-link py-1 rounded-0 h-100 text-uppercase" 
-                    @click="whichEditor = link.comp"
-                    :class="{'active text-dark': whichEditor === link.comp}">{{link.name}}</a>
-                </small>
-            </li>
-        </ul>
-        <div class="tab-content flex-grow h-100" id="mobile-editors">
-            <keep-alive>
-                <component :is="whichEditor"></component>
-            </keep-alive>
-        </div>
-    </div>
+    <app-tabs>
+        <app-tab :title="'html'" :selected="true">
+            <app-editor 
+                :name="'html'" 
+                :value="htmlCode" 
+                :cmMode="'text/xml'"
+                @changed="setHtmlCode($event)"></app-editor>
+        </app-tab>
+        <app-tab :title="'css'">
+            <app-editor 
+            :name="'css'" 
+            :value="cssCode" 
+            :cmMode="'text/css'"
+            @changed="setCssCode($event)"></app-editor>
+        </app-tab>
+        <app-tab :title="'js'">
+            <app-editor 
+            :name="'js'" 
+            :value="jsCode" 
+            :cmMode="'text/javascript'"
+            @changed="setJsCode($event)"></app-editor>
+        </app-tab>
+    </app-tabs>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import EditorMobileHtml from './html/EditorMobileHtml.vue';
-import EditorMobileCss from './css/EditorMobileCss.vue';
-import EditorMobileJs from './js/EditorMobileJs.vue';
+import { mapActions, mapState, mapMutations } from 'vuex';
 
 export default {
-    data() {
-        return {
-            tabLinks: [
-                {name: 'html', comp: 'app-editor-mobile-html'},
-                {name: 'css', comp: 'app-editor-mobile-css'},
-                {name: 'js', comp: 'app-editor-mobile-js'}
-            ],
-            whichEditor: 'app-editor-mobile-html'
-        }
-    },
-    components: {
-        appEditorMobileHtml: EditorMobileHtml,
-        appEditorMobileCss: EditorMobileCss,
-        appEditorMobileJs: EditorMobileJs
+    computed: {
+        ...mapState([
+            'htmlCode',
+            'cssCode',
+            'jsCode'
+        ])
     },
     methods: {
+        ...mapMutations([
+           'setHtmlCode' ,
+           'setCssCode',
+           'setJsCode'
+        ]),
         ...mapActions([
             'getCodeFromStorage',
             'showOutput',
@@ -52,7 +52,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import Editor from "./editor/Editor.vue";
-
 import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default {
@@ -26,9 +24,6 @@ export default {
             'cssCode',
             'jsCode'
         ])
-    },
-    components: {
-        appEditor: Editor
     },
     methods: {
         ...mapMutations([
