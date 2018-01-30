@@ -50,9 +50,9 @@ export const store = new Vuex.Store({
             commit('setSaved', true);
         },
         getCodeFromStorage({ commit }) {
-            let h = sessionStorage.getItem('html');
-            let c = sessionStorage.getItem('css');
-            let j = sessionStorage.getItem('js');
+            let h = sessionStorage.getItem('html') || '';
+            let c = sessionStorage.getItem('css') || '';
+            let j = sessionStorage.getItem('js') || '';
 
             commit('setHtmlCode', h);
             commit('setCssCode', c);
