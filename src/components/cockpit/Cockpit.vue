@@ -5,7 +5,7 @@
                 <app-editors-mobile></app-editors-mobile>
             </template>
             <template v-else>
-                <app-editors></app-editors>
+                <app-editors-desktop></app-editors-desktop>
             </template>
         </div>
         <div class="col-12 col-md-6 px-0 pr-lg-0 pl-lg-1">
@@ -16,9 +16,9 @@
 
 <script>
 const EditorsMobile = () => import("../editors/mobile/EditorsMobile.vue");
-const Editors = () => import("../editors/desktop/Editors.vue");
+const EditorsDesktop = () => import("../editors/desktop/EditorsDesktop.vue");
 // import EditorsMobile from "../editors/mobile/EditorsMobile.vue";
-// import Editors from "../editors/Editors.vue";
+// import EditorsDesktop from "../editors/desktop/EditorsDesktop.vue";
 import Render from "../render/Render.vue";
 
 export default {
@@ -29,7 +29,7 @@ export default {
     },
     components: {
         appEditorsMobile: EditorsMobile,
-        appEditors: Editors,
+        appEditorsDesktop: EditorsDesktop,
         appRender: Render
     }
 }
