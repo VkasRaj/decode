@@ -2,7 +2,8 @@
     <div v-if="isActive" 
         :id="title" 
         role="tabpanel" 
-        :aria-labelledby="title+'-tab'">
+        :aria-labelledby="title+'-tab'"
+        class="tab-content">
         <slot></slot>
     </div>
 </template>

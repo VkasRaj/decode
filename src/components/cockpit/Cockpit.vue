@@ -1,17 +1,17 @@
 <template>
-    <div class="workspace d-flex flex-wrap flex-grow">
-        <div class="col-12 col-md-6 px-0 pl-lg-0 pr-lg-1">
+    <main class="container-fluid row flex-wrap flex-grow h-100 px-0 mx-0">
+        <section class="showcase col-12 col-md-6 px-0 pl-lg-0 pr-lg-1">
             <template v-if="isMobile">
                 <app-editors-mobile></app-editors-mobile>
             </template>
             <template v-else>
                 <app-editors-desktop></app-editors-desktop>
             </template>
-        </div>
-        <div class="col-12 col-md-6 px-0 pr-lg-0 pl-lg-1">
+        </section>
+        <section class="showcase col-12 col-md-6 px-0 pr-lg-0 pl-lg-1">
             <app-render></app-render>
-        </div>
-    </div>
+        </section>
+    </main>
 </template>
 
 <script>
@@ -35,6 +35,14 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+    .showcase {
+        height: 50%;
+    }
 
+    @media only screen and (min-width: 768px) {
+        .showcase {
+            height: 100%;
+        }
+    }
 </style>

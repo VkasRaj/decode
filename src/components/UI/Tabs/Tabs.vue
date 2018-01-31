@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs-wrapper d-flex flex-column h-100">
+  <div class="tabs-wrapper">
     <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
       <li class="nav-item" v-for="(tab, i) in tabs" :key="i">
         <a 
@@ -13,9 +13,7 @@
           aria-selected="true">{{ tab.title }}</a>
       </li>
     </ul>
-    <div class="tab-content" id="myTabContent">
-      <slot></slot>
-    </div>
+    <slot></slot>
   </div>
 </template>
 

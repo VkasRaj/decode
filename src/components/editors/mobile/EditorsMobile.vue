@@ -52,3 +52,16 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    .tabs-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        .tab-content {
+            display: flex;
+            flex-grow: 1;
+            height: 100%;
+        }
+    }
+</style>
