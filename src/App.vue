@@ -27,6 +27,9 @@ export default {
 
   ::-webkit-scrollbar {
     width: .3rem;
+    &:horizontal {
+      height: .3rem;
+    }
   }
   ::-webkit-scrollbar-thumb {
     background-color: $light;
@@ -54,6 +57,9 @@ export default {
   .CodeMirror {
     border: 1px solid $body !important;
     height: 100% !important;
+  }
+  .CodeMirror-scrollbar-filler {
+    background: transparent !important;
   }
   @for $i from 1 through 5 {
     .letter-spacing-#{$i} {
