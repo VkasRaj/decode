@@ -1,11 +1,23 @@
 <template>
     <div id="editor-wrapper" class="h-100">
-        <app-editor v-for="editor in editors" :key="editor.name"
-            :name="editor.name"
-            :value="editor.value"
-            @changed="onRecieveCode($event, editor.name)"
-            @keyup.native.exact.ctrl.enter="showOutput"
-            :cmMode="editor.mode"></app-editor>
+        <app-editor 
+            :name="'html'" 
+            :value="htmlCode" 
+            @changed="setHtmlCode($event)" 
+            :mode="'text/xml'" 
+            @keyup.native.exact.ctrl.enter="showOutput"></app-editor>
+        <app-editor 
+            :name="'css'" 
+            :value="cssCode" 
+            @changed="setCssCode($event)" 
+            :mode="'text/css'" 
+            @keyup.native.exact.ctrl.enter="showOutput"></app-editor>
+        <app-editor 
+            :name="'js'"
+            :value="jsCode" 
+            @changed="setJsCode($event)" 
+            :mode="'text/javascript'" 
+            @keyup.native.exact.ctrl.enter="showOutput"></app-editor>
     </div>
 </template>
 
@@ -13,11 +25,6 @@
 import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default {
-    data() {
-        return {
-            editors: []
-        }
-    },
     computed: {
         ...mapState([
             'htmlCode',
@@ -35,35 +42,10 @@ export default {
         ...mapActions([
             'showOutput',
             'getCodeFromStorage',
-        ]),
-        onRecieveCode(code, name) {
-            this.setSaved(false);
-            if (name === 'html') {
-                this.setHtmlCode(code);
-            } else if (name === 'css') {
-                this.setCssCode(code);
-            } else if (name === 'js') {
-                this.setJsCode(code);
-            }
-        }
+        ])
     },
-    mounted() {
+    created() {
         this.getCodeFromStorage();
-        this.editors = [
-            {
-                name: 'html',
-                mode: 'text/xml',
-                value: this.htmlCode
-            }, { 
-                name: 'css',
-                mode: 'text/css',
-                value: this.cssCode
-            }, { 
-                name: 'js',
-                mode: 'text/javascript',
-                value: this.jsCode
-            },
-        ]
         this.showOutput();
     }
 }

@@ -4,22 +4,22 @@
             <app-editor 
                 :name="'html'" 
                 :value="htmlCode" 
-                :cmMode="'text/xml'"
+                :mode="'text/xml'"
                 @changed="setHtmlCode($event)"></app-editor>
         </app-tab>
         <app-tab :title="'css'">
             <app-editor 
-            :name="'css'" 
-            :value="cssCode" 
-            :cmMode="'text/css'"
-            @changed="setCssCode($event)"></app-editor>
+                :name="'css'" 
+                :value="cssCode" 
+                :mode="'text/css'"
+                @changed="setCssCode($event)"></app-editor>
         </app-tab>
         <app-tab :title="'js'">
             <app-editor 
-            :name="'js'" 
-            :value="jsCode" 
-            :cmMode="'text/javascript'"
-            @changed="setJsCode($event)"></app-editor>
+                :name="'js'" 
+                :value="jsCode" 
+                :mode="'text/javascript'"
+                @changed="setJsCode($event)"></app-editor>
         </app-tab>
     </app-tabs>
 </template>

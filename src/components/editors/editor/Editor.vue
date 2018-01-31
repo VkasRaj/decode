@@ -15,7 +15,7 @@ export default {
             required: true
         },
         value: true,
-        cmMode: {
+        mode: {
             type: String
         }
     },
@@ -28,7 +28,7 @@ export default {
         this.codeTextarea = fromTextArea(this.$refs.codeTextarea, {
             lineNumbers: true,
             mode: {
-                name: this.cmMode,
+                name: this.mode,
             },
             theme: 'dracula'
         })

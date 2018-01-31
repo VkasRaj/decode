@@ -13,12 +13,15 @@ export const store = new Vuex.Store({
     },
     mutations: {
         setHtmlCode(state, payload) {
+            state.saved = false;
             state.htmlCode = payload;
         },
         setCssCode(state, payload) {
+            state.saved = false;
             state.cssCode = payload;
         },
         setJsCode(state, payload) {
+            state.saved = false;
             state.jsCode = payload;
         },
         setOutput(state, payload) {
