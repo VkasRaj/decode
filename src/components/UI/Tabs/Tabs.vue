@@ -3,8 +3,13 @@
     <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
       <li class="nav-item" v-for="(tab, i) in tabs" :key="i">
         <a 
+          :href="tab.href"
           class="nav-link rounded-0 py-0 text-uppercase"
-          :class="{'active': tab.isActive, 'text-white': !tab.isActive}"
+          :class="{
+            'active': tab.isActive,
+            'text-white': !tab.isActive && dark,
+            'bg-dark text-white': tab.isActive && light
+          }"
           @click="selectTab(tab)"
           id="home-tab" 
           data-toggle="tab" 
@@ -19,6 +24,10 @@
 
 <script>
 export default {
+  props: {
+    light: true,
+    dark: true
+  },
   data() {
     return {
       tabs: null,

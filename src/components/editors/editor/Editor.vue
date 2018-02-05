@@ -1,7 +1,10 @@
 <template>
     <div class="editor w-100 position-relative h-100">
         <textarea ref="codeTextarea"></textarea>
-        <small class="lang-title text-uppercase position-absolute">{{ name }}</small>
+        <div class="editor-extra">
+            <small class="text-uppercase">{{ name }}</small>
+            <slot></slot>
+        </div>
     </div>
 </template>
 
@@ -42,7 +45,8 @@ export default {
 <style lang="scss" scoped>
     $light: #868e96;
     .editor {
-        & small.lang-title {
+        .editor-extra {
+            position: absolute;
             color: $light;
             right: .5rem;
             bottom: .5rem;

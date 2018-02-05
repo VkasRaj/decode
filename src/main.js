@@ -10,6 +10,8 @@ import Header from "./components/header/Header.vue";
 import Editor from "./components/editors/editor/Editor.vue"
 import Tabs from "./components/UI/Tabs/Tabs.vue";
 import Tab from "./components/UI/Tabs/Tab/Tab.vue";
+import Modal from "./components/UI/modal/Modal.vue";
+import Backdrop from "./components/UI/backdrop/Backdrop.vue";
 
 // Vue Directives Imports ============
 // import { Codemirror } from "./directive/Codemirror";
@@ -20,6 +22,8 @@ Vue.component('app-header', Header);
 Vue.component('app-editor', Editor);
 Vue.component('app-tabs', Tabs);
 Vue.component('app-tab', Tab);
+Vue.component('app-modal', Modal);
+Vue.component('app-backdrop', Backdrop);
 
 // Registering Third party libraries ==========
   // another way of registering (just for note purpose)

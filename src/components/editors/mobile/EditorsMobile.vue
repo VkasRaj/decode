@@ -1,5 +1,5 @@
 <template>
-    <app-tabs>
+    <app-tabs :dark='true'>
         <app-tab :title="'html'" :selected="true">
             <app-editor 
                 :name="'html'" 
