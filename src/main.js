@@ -8,11 +8,14 @@ import { store } from "./store/store";
 import App from './App.vue';
 import Header from "./components/header/Header.vue";
 import Editor from "./components/editors/editor/Editor.vue"
-import Tabs from "./components/UI/Tabs/Tabs.vue";
-import Tab from "./components/UI/Tabs/Tab/Tab.vue";
+import Tabs from "./components/UI/tabs/Tabs.vue";
+import Tab from "./components/UI/tabs/tab/Tab.vue";
 import Modal from "./components/UI/modal/Modal.vue";
+import ModalHeader from "./components/UI/modal/modal-header/ModalHeader.vue";
+import ModalBody from "./components/UI/modal/modal-body/ModalBody.vue";
 import Backdrop from "./components/UI/backdrop/Backdrop.vue";
 import Input from "./components/UI/input/Input.vue";
+import FormGroup from "./components/UI/form-group/FormGroup.vue";
 
 // Vue Directives Imports ============
 // import { Codemirror } from "./directive/Codemirror";
@@ -24,8 +27,11 @@ Vue.component('app-editor', Editor);
 Vue.component('app-tabs', Tabs);
 Vue.component('app-tab', Tab);
 Vue.component('app-modal', Modal);
+Vue.component('app-modal-header', ModalHeader);
+Vue.component('app-modal-body', ModalBody);
 Vue.component('app-backdrop', Backdrop);
 Vue.component('app-input', Input);
+Vue.component('app-form-group', FormGroup);
 
 // Registering Third party libraries ==========
   // another way of registering (just for note purpose)

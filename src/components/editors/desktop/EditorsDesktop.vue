@@ -1,35 +1,43 @@
 <template>
     <div id="editor-wrapper" class="h-100">
-        <!-- <app-modal v-if="showModal">
-            <div class="modal-body">
-                <app-tabs :light='true'>
-                    <app-tab title="html" :selected='true'>
-                        <h1>this is html tab</h1>
-                    </app-tab>
-                    <app-tab title="css">
-                        <h1>this is css tab</h1>
-                    </app-tab>
-                    <app-tab title="js">
-                        <h1>this is js tab</h1>
-                    </app-tab>
-                </app-tabs>
-            </div>
-        </app-modal> -->
         <app-modal v-if="htmlModal" @close="htmlModal = false">
-            <div class="modal-body">
-                <app-input></app-input>
-            </div>
+            <app-modal-header>
+                <h5 class="mb-0">Code Setting: <strong>HTML</strong></h5>
+            </app-modal-header>
+            <app-modal-body>
+                <app-form-group label="Add Class(es) to <html>">
+                    <app-input slot="input" placeholder="e.g. bg-primary text-white"></app-input>
+                </app-form-group>
+                <app-form-group label="Stuff for <head>">
+                    <app-input type='textarea' slot="input" placeholder="e.g. <meta> <link> <script>"></app-input>
+                </app-form-group>
+            </app-modal-body>
         </app-modal>
+
         <app-modal v-if="cssModal" @close="cssModal = false">
-            <div class="modal-body">
-                <app-input></app-input>
-            </div>
+            <app-modal-header>
+                <h5 class="mb-0">Code Setting: <strong class="text-primary">CSS</strong></h5>
+            </app-modal-header>
+            <app-modal-body>
+                <app-form-group label="Add External Stylesheets/Library (URLs)">
+                    <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;link&gt;s in order, and before the CSS in the editor.</small>
+                    <app-input slot="input" placeholder="e.g. https://getbootstrap.com"></app-input>
+                </app-form-group>
+            </app-modal-body>
         </app-modal>
+
         <app-modal v-if="jsModal" @close="jsModal = false">
-            <div class="modal-body">
-                <app-input></app-input>
-            </div>
+            <app-modal-header>
+                <h5 class="mb-0">Code Setting: <strong class="text-warning">Javascript</strong></h5>
+            </app-modal-header>
+            <app-modal-body>
+                <app-form-group label="Add External Scripts/Library (URLs)">
+                    <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;script&gt;s in order, and before the Javascript in the editor.</small>
+                    <app-input slot="input" placeholder="e.g. https://code.jquery.com"></app-input>
+                </app-form-group>
+            </app-modal-body>
         </app-modal>
+
         <app-editor 
             :name="'html'" 
             :value="htmlCode" 
@@ -58,7 +66,7 @@
 </template>
 
 <script>
-import Setting from '../settings-icon/Setting.vue';
+import Setting from '../editor/editor-setting/Setting.vue';
 import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default {
