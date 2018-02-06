@@ -16,6 +16,7 @@ import ModalBody from "./components/UI/modal/modal-body/ModalBody.vue";
 import Backdrop from "./components/UI/backdrop/Backdrop.vue";
 import Input from "./components/UI/input/Input.vue";
 import FormGroup from "./components/UI/form-group/FormGroup.vue";
+import Button from "./components/UI/button/Button.vue";
 
 // Vue Directives Imports ============
 // import { Codemirror } from "./directive/Codemirror";
@@ -32,6 +33,7 @@ Vue.component('app-modal-body', ModalBody);
 Vue.component('app-backdrop', Backdrop);
 Vue.component('app-input', Input);
 Vue.component('app-form-group', FormGroup);
+Vue.component('app-button', Button);
 
 // Registering Third party libraries ==========
   // another way of registering (just for note purpose)

@@ -1,5 +1,6 @@
 <template>
     <div id="editor-wrapper" class="h-100">
+        
         <app-modal v-if="htmlModal" @close="htmlModal = false">
             <app-modal-header>
                 <h5 class="mb-0">Code Setting: <strong>HTML</strong></h5>
@@ -11,6 +12,10 @@
                 <app-form-group label="Stuff for <head>">
                     <app-input type='textarea' slot="input" placeholder="e.g. <meta> <link> <script>"></app-input>
                 </app-form-group>
+                <div class="text-right">
+                    <app-button type='light' @clicked="htmlModal = false">Close</app-button>
+                    <app-button type='dark'>Save</app-button>
+                </div>
             </app-modal-body>
         </app-modal>
 
@@ -23,6 +28,10 @@
                     <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;link&gt;s in order, and before the CSS in the editor.</small>
                     <app-input slot="input" placeholder="e.g. https://getbootstrap.com"></app-input>
                 </app-form-group>
+                <div class="text-right">
+                    <app-button type='light' @clicked="cssModal = false">Close</app-button>
+                    <app-button type='dark'>Save</app-button>
+                </div>
             </app-modal-body>
         </app-modal>
 
@@ -35,6 +44,10 @@
                     <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;script&gt;s in order, and before the Javascript in the editor.</small>
                     <app-input slot="input" placeholder="e.g. https://code.jquery.com"></app-input>
                 </app-form-group>
+                <div class="text-right">
+                    <app-button type='light' @clicked="jsModal = false">Close</app-button>
+                    <app-button type='dark'>Save</app-button>
+                </div>
             </app-modal-body>
         </app-modal>
 
