@@ -52,6 +52,10 @@ body {
     background: transparent !important;
 }
 
+.text-orange {
+    color: #fd7e14;
+}
+
 @for $i from 1 through 5 {
     .letter-spacing-#{$i} {
         letter-spacing: #{.1*$i}rem;

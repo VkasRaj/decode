@@ -1,7 +1,17 @@
 <template>
     <span>
-        <input v-if="type === 'input'" type="text" class="form-control rounded-0 border border-dark" :placeholder="placeholder" :value="val" @change="$emit('onChange')">
-        <textarea v-if="type === 'textarea'" class="form-control rounded-0 border border-dark" :placeholder="placeholder" :value="val" @change="$emit('onChange')"></textarea>
+        <input 
+            type="text" class="form-control rounded-0 border border-dark" 
+            v-if="type === 'input'" 
+            :placeholder="placeholder" 
+            :value="val" 
+            @input="(event) => $emit('onInput', event.target.value)">
+        <textarea 
+            class="form-control rounded-0 border border-dark" 
+            v-if="type === 'textarea'" 
+            :placeholder="placeholder" 
+            :value="val" 
+            @input="(event) => $emit('onInput', event.target.value)"></textarea>
     </span>
 </template>
 

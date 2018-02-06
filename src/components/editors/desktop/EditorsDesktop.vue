@@ -1,16 +1,23 @@
 <template>
     <div id="editor-wrapper" class="h-100">
-        
+
         <app-modal v-if="htmlModal" @close="htmlModal = false">
             <app-modal-header>
-                <h5 class="mb-0">Code Setting: <strong>HTML</strong></h5>
+                <h5 class="mb-0">Code Setting: <strong class="text-orange">HTML</strong></h5>
             </app-modal-header>
             <app-modal-body>
                 <app-form-group label="Add Class(es) to <html>">
-                    <app-input slot="input" placeholder="e.g. bg-primary text-white"></app-input>
+                    <small slot="extra-info-top" class="d-block text-secondary mb-2">Multiple classes should be separated by space.</small>
+                    <app-input 
+                        slot="input" 
+                        placeholder="e.g. bg-primary text-white" 
+                        @onInput="htmlConfig.htmlTagClasses = $event"></app-input>
                 </app-form-group>
                 <app-form-group label="Stuff for <head>">
-                    <app-input type='textarea' slot="input" placeholder="e.g. <meta> <link> <script>"></app-input>
+                    <app-input type='textarea' 
+                        slot="input" 
+                        placeholder="e.g. <meta> <link> <script>" 
+                        @onInput="htmlConfig.headStuff = $event"></app-input>
                 </app-form-group>
                 <div class="text-right">
                     <app-button type='light' @clicked="htmlModal = false">Close</app-button>
@@ -26,11 +33,11 @@
             <app-modal-body>
                 <app-form-group label="Add External Stylesheets/Library (URLs)">
                     <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;link&gt;s in order, and before the CSS in the editor.</small>
-                    <app-input slot="input" placeholder="e.g. https://getbootstrap.com"></app-input>
+                    <app-input slot="input" placeholder="e.g. https://getbootstrap.com" @onInput="cssStylesheet = $event"></app-input>
                 </app-form-group>
                 <div class="text-right">
                     <app-button type='light' @clicked="cssModal = false">Close</app-button>
-                    <app-button type='dark'>Save</app-button>
+                    <app-button type='dark' @clicked="addStylesheet">Add</app-button>
                 </div>
             </app-modal-body>
         </app-modal>
@@ -46,7 +53,7 @@
                 </app-form-group>
                 <div class="text-right">
                     <app-button type='light' @clicked="jsModal = false">Close</app-button>
-                    <app-button type='dark'>Save</app-button>
+                    <app-button type='dark' @clicked="addScript">Save</app-button>
                 </div>
             </app-modal-body>
         </app-modal>
@@ -85,6 +92,18 @@ import { mapActions, mapMutations, mapState } from 'vuex';
 export default {
     data() {
         return {
+            cssStylesheet: '',
+            jsScript: '',
+            htmlConfig: {
+                htmlTagClasses: '',
+                headStuff: ''
+            },
+            cssConfig: {
+                stylesheets: []
+            },
+            jsConfig: {
+                scripts: []
+            },
             htmlModal: false,
             cssModal: false,
             jsModal: false
@@ -107,7 +126,19 @@ export default {
         ...mapActions([
             'showOutput',
             'getCodeFromStorage',
-        ])
+        ]),
+        addStylesheet() {
+            if (!this.cssStylesheet) {
+                alert('Please enter URL of stylesheet/framework')
+            }
+            this.cssConfig.stylesheets.push(this.cssStylesheet)
+        },
+        addScript() {
+            if (!this.jsScript) {
+                alert('Please enter URL of script/library')
+            }
+            this.jsConfig.scripts.push(this.jsScript)
+        }
     },
     components: {
         'app-editor-setting': Setting
