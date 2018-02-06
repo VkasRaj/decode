@@ -15,30 +15,21 @@
                 </app-tabs>
             </div>
         </app-modal> -->
-        <template v-if="htmlModal">
-            <app-backdrop></app-backdrop>
-            <app-modal @close="htmlModal = false">
-                <div class="modal-body">
-                    html
-                </div>
-            </app-modal>
-        </template>
-        <template v-if="cssModal">
-            <app-backdrop></app-backdrop>
-            <app-modal @close="cssModal = false">
-                <div class="modal-body">
-                    css
-                </div>
-            </app-modal>
-        </template>
-        <template v-if="jsModal">
-            <app-backdrop></app-backdrop>
-            <app-modal @close="jsModal = false">
-                <div class="modal-body">
-                    js
-                </div>
-            </app-modal>
-        </template>
+        <app-modal v-if="htmlModal" @close="htmlModal = false">
+            <div class="modal-body">
+                <app-input></app-input>
+            </div>
+        </app-modal>
+        <app-modal v-if="cssModal" @close="cssModal = false">
+            <div class="modal-body">
+                <app-input></app-input>
+            </div>
+        </app-modal>
+        <app-modal v-if="jsModal" @close="jsModal = false">
+            <div class="modal-body">
+                <app-input></app-input>
+            </div>
+        </app-modal>
         <app-editor 
             :name="'html'" 
             :value="htmlCode" 
@@ -73,9 +64,9 @@ import { mapActions, mapMutations, mapState } from 'vuex';
 export default {
     data() {
         return {
-        htmlModal: false,
-        cssModal: false,
-        jsModal: false
+            htmlModal: false,
+            cssModal: false,
+            jsModal: false
         }
     },
     computed: {

@@ -12,6 +12,7 @@ import Tabs from "./components/UI/Tabs/Tabs.vue";
 import Tab from "./components/UI/Tabs/Tab/Tab.vue";
 import Modal from "./components/UI/modal/Modal.vue";
 import Backdrop from "./components/UI/backdrop/Backdrop.vue";
+import Input from "./components/UI/input/Input.vue";
 
 // Vue Directives Imports ============
 // import { Codemirror } from "./directive/Codemirror";
@@ -24,6 +25,7 @@ Vue.component('app-tabs', Tabs);
 Vue.component('app-tab', Tab);
 Vue.component('app-modal', Modal);
 Vue.component('app-backdrop', Backdrop);
+Vue.component('app-input', Input);
 
 // Registering Third party libraries ==========
   // another way of registering (just for note purpose)
