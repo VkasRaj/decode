@@ -3,7 +3,7 @@
         :id="title" 
         role="tabpanel" 
         :aria-labelledby="title+'-tab'"
-        class="tab-content">
+        class="tab-content pt-3">
         <slot></slot>
     </div>
 </template>

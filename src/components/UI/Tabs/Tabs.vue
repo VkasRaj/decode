@@ -8,6 +8,7 @@
           :class="{
             'active': tab.isActive,
             'text-white': !tab.isActive && dark,
+            'text-dark': !tab.isActive && light,
             'bg-dark text-white': tab.isActive && light
           }"
           @click="selectTab(tab)"

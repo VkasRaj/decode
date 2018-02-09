@@ -1,60 +1,49 @@
 <template>
     <div id="editor-wrapper" class="h-100">
-
-        <app-modal v-if="htmlModal" @close="htmlModal = false">
-            <app-modal-header>
-                <h5 class="mb-0">Code Setting: <strong class="text-orange">HTML</strong></h5>
-            </app-modal-header>
+        <app-modal v-if="isModal === true" @close="isModal = false">
             <app-modal-body>
-                <app-form-group label="Add Class(es) to <html>">
-                    <small slot="extra-info-top" class="d-block text-secondary mb-2">Multiple classes should be separated by space.</small>
-                    <app-input 
-                        slot="input" 
-                        placeholder="e.g. bg-primary text-white" 
-                        @onInput="htmlConfig.htmlTagClasses = $event"></app-input>
-                </app-form-group>
-                <app-form-group label="Stuff for <head>">
-                    <app-input type='textarea' 
-                        slot="input" 
-                        placeholder="e.g. <meta> <link> <script>" 
-                        @onInput="htmlConfig.headStuff = $event"></app-input>
-                </app-form-group>
-                <div class="text-right">
-                    <app-button type='light' @clicked="htmlModal = false">Close</app-button>
-                    <app-button type='dark'>Save</app-button>
-                </div>
-            </app-modal-body>
-        </app-modal>
-
-        <app-modal v-if="cssModal" @close="cssModal = false">
-            <app-modal-header>
-                <h5 class="mb-0">Code Setting: <strong class="text-primary">CSS</strong></h5>
-            </app-modal-header>
-            <app-modal-body>
-                <app-form-group label="Add External Stylesheets/Library (URLs)">
-                    <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;link&gt;s in order, and before the CSS in the editor.</small>
-                    <app-input slot="input" placeholder="e.g. https://getbootstrap.com" @onInput="cssStylesheet = $event"></app-input>
-                </app-form-group>
-                <div class="text-right">
-                    <app-button type='light' @clicked="cssModal = false">Close</app-button>
-                    <app-button type='dark' @clicked="addStylesheet">Add</app-button>
-                </div>
-            </app-modal-body>
-        </app-modal>
-
-        <app-modal v-if="jsModal" @close="jsModal = false">
-            <app-modal-header>
-                <h5 class="mb-0">Code Setting: <strong class="text-warning">Javascript</strong></h5>
-            </app-modal-header>
-            <app-modal-body>
-                <app-form-group label="Add External Scripts/Library (URLs)">
-                    <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;script&gt;s in order, and before the Javascript in the editor.</small>
-                    <app-input slot="input" placeholder="e.g. https://code.jquery.com"></app-input>
-                </app-form-group>
-                <div class="text-right">
-                    <app-button type='light' @clicked="jsModal = false">Close</app-button>
-                    <app-button type='dark' @clicked="addScript">Save</app-button>
-                </div>
+                <h5 class="mb-3 letter-spacing-1 text-uppercase">Code Setting</h5>
+                <app-tabs :light='true'>
+                    <app-tab title='html' :selected="whichTab === 'html'">
+                        <app-form-group label="Add Class(es) to <html>">
+                            <small slot="extra-info-top" class="d-block text-secondary mb-2">Multiple classes should be separated by space.</small>
+                            <app-input 
+                                slot="input" 
+                                placeholder="e.g. bg-primary text-white" 
+                                @onInput="htmlConfig.htmlTagClasses = $event"></app-input>
+                        </app-form-group>
+                        <app-form-group label="Stuff for <head>">
+                            <app-input type='textarea' 
+                                slot="input" 
+                                placeholder="e.g. <meta> <link> <script>" 
+                                @onInput="htmlConfig.headStuff = $event"></app-input>
+                        </app-form-group>
+                        <div class="text-right">
+                            <app-button type='light' @clicked="isModal = false">Close</app-button>
+                            <app-button type='dark'>Save</app-button>
+                        </div>
+                    </app-tab>
+                    <app-tab title='css' :selected="whichTab === 'css'">
+                        <app-form-group label="Add External Stylesheets/Library (URLs)">
+                            <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;link&gt;s in order, and before the CSS in the editor.</small>
+                            <app-input slot="input" placeholder="e.g. https://getbootstrap.com" @onInput="cssStylesheet = $event"></app-input>
+                        </app-form-group>
+                        <div class="text-right">
+                            <app-button type='light' @clicked="isModal = false">Close</app-button>
+                            <app-button type='dark' @clicked="addStylesheet">Add</app-button>
+                        </div>
+                    </app-tab>
+                    <app-tab title='js' :selected="whichTab === 'js'">
+                        <app-form-group label="Add External Scripts/Library (URLs)">
+                            <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;script&gt;s in order, and before the Javascript in the editor.</small>
+                            <app-input slot="input" placeholder="e.g. https://code.jquery.com"></app-input>
+                        </app-form-group>
+                        <div class="text-right">
+                            <app-button type='light' @clicked="isModal = false">Close</app-button>
+                            <app-button type='dark' @clicked="addScript">Save</app-button>
+                        </div>
+                    </app-tab>
+                </app-tabs>
             </app-modal-body>
         </app-modal>
 
@@ -64,7 +53,7 @@
             @changed="setHtmlCode($event)" 
             :mode="'text/xml'" 
             @keyup.native.exact.ctrl.enter="showOutput">
-                <app-editor-setting @clicked="htmlModal = true"></app-editor-setting>
+                <app-editor-setting @clicked="showModalAndTabs('html')"></app-editor-setting>
             </app-editor>
         <app-editor 
             :name="'css'" 
@@ -72,7 +61,7 @@
             @changed="setCssCode($event)" 
             :mode="'text/css'" 
             @keyup.native.exact.ctrl.enter="showOutput">
-                <app-editor-setting @clicked="cssModal = true"></app-editor-setting>
+                <app-editor-setting @clicked="showModalAndTabs('css')"></app-editor-setting>
             </app-editor>
         <app-editor 
             :name="'js'"
@@ -80,7 +69,7 @@
             @changed="setJsCode($event)" 
             :mode="'text/javascript'" 
             @keyup.native.exact.ctrl.enter="showOutput">
-                <app-editor-setting @clicked="jsModal = true"></app-editor-setting>
+                <app-editor-setting @clicked="showModalAndTabs('js')"></app-editor-setting>
             </app-editor>
     </div>
 </template>
@@ -104,9 +93,8 @@ export default {
             jsConfig: {
                 scripts: []
             },
-            htmlModal: false,
-            cssModal: false,
-            jsModal: false
+            isModal: false,
+            whichTab: 'html'
         }
     },
     computed: {
@@ -127,6 +115,10 @@ export default {
             'showOutput',
             'getCodeFromStorage',
         ]),
+        showModalAndTabs(tab) {
+            this.isModal = true;
+            this.whichTab = tab;
+        },
         addStylesheet() {
             if (!this.cssStylesheet) {
                 alert('Please enter URL of stylesheet/framework')
