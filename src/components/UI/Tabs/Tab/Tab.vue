@@ -3,7 +3,8 @@
         :id="title" 
         role="tabpanel" 
         :aria-labelledby="title+'-tab'"
-        class="tab-content pt-3">
+        class="tab-content"
+        :class="classes">
         <slot></slot>
     </div>
 </template>
@@ -18,7 +19,8 @@ export default {
         selected: {
             type: Boolean,
             default: false
-        }
+        },
+        classes: String
     },
     data() {
         return {

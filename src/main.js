@@ -7,16 +7,17 @@ import { store } from "./store/store";
 // Vue Components Imports ============
 import App from './App.vue';
 import Header from "./components/header/Header.vue";
-import Editor from "./components/editors/editor/Editor.vue"
-import Tabs from "./components/UI/tabs/Tabs.vue";
-import Tab from "./components/UI/tabs/tab/Tab.vue";
-import Modal from "./components/UI/modal/Modal.vue";
-import ModalHeader from "./components/UI/modal/modal-header/ModalHeader.vue";
-import ModalBody from "./components/UI/modal/modal-body/ModalBody.vue";
-import Backdrop from "./components/UI/backdrop/Backdrop.vue";
-import Input from "./components/UI/input/Input.vue";
-import FormGroup from "./components/UI/form-group/FormGroup.vue";
-import Button from "./components/UI/button/Button.vue";
+import Editor from "./components/editors/editor/Editor.vue";
+
+const Tabs = () => import("./components/UI/tabs/Tabs.vue");
+const Tab = () => import("./components/UI/tabs/tab/Tab.vue");
+const Modal = () => import("./components/UI/modal/Modal.vue");
+const ModalHeader = () => import("./components/UI/modal/modal-header/ModalHeader.vue");
+const ModalBody = () => import("./components/UI/modal/modal-body/ModalBody.vue");
+const Backdrop = () => import("./components/UI/backdrop/Backdrop.vue");
+const Input = () => import("./components/UI/input/Input.vue");
+const FormGroup = () => import("./components/UI/form-group/FormGroup.vue");
+const Button = () => import("./components/UI/button/Button.vue");
 
 // Vue Directives Imports ============
 // import { Codemirror } from "./directive/Codemirror";

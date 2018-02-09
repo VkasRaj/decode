@@ -5,7 +5,7 @@
                 <app-modal-body>
                     <h5 class="mb-3 letter-spacing-1 text-uppercase">Code Settings</h5>
                     <app-tabs :light='true'>
-                        <app-tab title='html' :selected="whichTab === 'html'">
+                        <app-tab title='html' :selected="whichTab === 'html'" classes="pt-3">
                             <app-form-group label="Add Class(es) to <html>">
                                 <small slot="extra-info-top" class="d-block text-secondary mb-2">Multiple classes should be separated by space.</small>
                                 <app-input 
@@ -27,7 +27,7 @@
                                 <app-button type='dark' @clicked="setHtmlConfig({htmlTagClasses, headStuff})">Save</app-button>
                             </div>
                         </app-tab>
-                        <app-tab title='css' :selected="whichTab === 'css'">
+                        <app-tab title='css' :selected="whichTab === 'css'" classes="pt-3">
                             <app-form-group label="Add External Stylesheets/Library (URLs)">
                                 <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;link&gt;s in order, and before the CSS in the editor.</small>
                                 <app-input 
@@ -41,7 +41,7 @@
                                 <app-button type='dark' @clicked="setCssConfig({ stylesheets })">Save</app-button>
                             </div>
                         </app-tab>
-                        <app-tab title='js' :selected="whichTab === 'js'">
+                        <app-tab title='js' :selected="whichTab === 'js'" classes="pt-3"> 
                             <app-form-group label="Add External Scripts/Library (URLs)">
                                 <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;script&gt;s in order, and before the Javascript in the editor.</small>
                                 <app-input 
