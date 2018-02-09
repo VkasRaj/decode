@@ -9,38 +9,49 @@
                             <small slot="extra-info-top" class="d-block text-secondary mb-2">Multiple classes should be separated by space.</small>
                             <app-input 
                                 slot="input" 
-                                placeholder="e.g. bg-primary text-white" 
-                                @onInput="htmlConfig.htmlTagClasses = $event"></app-input>
+                                placeholder="e.g. bg-primary text-white"
+                                :val="htmlConfig.htmlTagClasses"
+                                @onInput="htmlTagClasses = $event"></app-input>
                         </app-form-group>
                         <app-form-group label="Stuff for <head>">
+                            <small slot="extra-info-top" class="d-block text-secondary mb-2">All the HTML tags that will go into &lt;head&gt;</small>
                             <app-input type='textarea' 
                                 slot="input" 
                                 placeholder="e.g. <meta> <link> <script>" 
-                                @onInput="htmlConfig.headStuff = $event"></app-input>
+                                :val="htmlConfig.headStuff"
+                                @onInput="headStuff = $event"></app-input>
                         </app-form-group>
                         <div class="text-right">
                             <app-button type='light' @clicked="isModal = false">Close</app-button>
-                            <app-button type='dark'>Save</app-button>
+                            <app-button type='dark' @clicked="setHtmlConfig({htmlTagClasses, headStuff})">Save</app-button>
                         </div>
                     </app-tab>
                     <app-tab title='css' :selected="whichTab === 'css'">
                         <app-form-group label="Add External Stylesheets/Library (URLs)">
                             <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;link&gt;s in order, and before the CSS in the editor.</small>
-                            <app-input slot="input" placeholder="e.g. https://getbootstrap.com" @onInput="cssStylesheet = $event"></app-input>
+                            <app-input 
+                                slot="input" 
+                                placeholder="e.g. https://getbootstrap.com"
+                                :val="cssConfig.stylesheets"
+                                @onInput="stylesheets = $event"></app-input>
                         </app-form-group>
                         <div class="text-right">
                             <app-button type='light' @clicked="isModal = false">Close</app-button>
-                            <app-button type='dark' @clicked="addStylesheet">Add</app-button>
+                            <app-button type='dark' @clicked="setCssConfig({ stylesheets })">Save</app-button>
                         </div>
                     </app-tab>
                     <app-tab title='js' :selected="whichTab === 'js'">
                         <app-form-group label="Add External Scripts/Library (URLs)">
                             <small slot="extra-info-top" class="d-block text-secondary mb-2">Any Url's added here will be added as &lt;script&gt;s in order, and before the Javascript in the editor.</small>
-                            <app-input slot="input" placeholder="e.g. https://code.jquery.com"></app-input>
+                            <app-input 
+                                slot="input" 
+                                placeholder="e.g. https://code.jquery.com"
+                                :val="jsConfig.scripts"
+                                @onInput="scripts = $event"></app-input>
                         </app-form-group>
                         <div class="text-right">
                             <app-button type='light' @clicked="isModal = false">Close</app-button>
-                            <app-button type='dark' @clicked="addScript">Save</app-button>
+                            <app-button type='dark' @clicked="setJsConfig({ scripts })">Save</app-button>
                         </div>
                     </app-tab>
                 </app-tabs>
@@ -81,18 +92,10 @@ import { mapActions, mapMutations, mapState } from 'vuex';
 export default {
     data() {
         return {
-            cssStylesheet: '',
-            jsScript: '',
-            htmlConfig: {
-                htmlTagClasses: '',
-                headStuff: ''
-            },
-            cssConfig: {
-                stylesheets: []
-            },
-            jsConfig: {
-                scripts: []
-            },
+            htmlTagClasses: '',
+            headStuff: '',
+            stylesheets: '',
+            scripts: '',
             isModal: false,
             whichTab: 'html'
         }
@@ -101,15 +104,20 @@ export default {
         ...mapState([
             'htmlCode',
             'cssCode',
-            'jsCode'
+            'jsCode',
+            'htmlConfig',
+            'cssConfig',
+            'jsConfig'
         ])
     },
     methods: {
         ...mapMutations([
-            'setSaved',
             'setHtmlCode',
             'setCssCode',
-            'setJsCode'
+            'setJsCode',
+            'setHtmlConfig',
+            'setCssConfig',
+            'setJsConfig'
         ]),
         ...mapActions([
             'showOutput',
@@ -119,18 +127,18 @@ export default {
             this.isModal = true;
             this.whichTab = tab;
         },
-        addStylesheet() {
-            if (!this.cssStylesheet) {
-                alert('Please enter URL of stylesheet/framework')
-            }
-            this.cssConfig.stylesheets.push(this.cssStylesheet)
-        },
-        addScript() {
-            if (!this.jsScript) {
-                alert('Please enter URL of script/library')
-            }
-            this.jsConfig.scripts.push(this.jsScript)
-        }
+        // addStylesheet() {
+        //     if (!this.cssStylesheet) {
+        //         alert('Please enter URL of stylesheet/framework')
+        //     }
+        //     this.cssConfig.stylesheets.push(this.cssStylesheet)
+        // },
+        // addScript() {
+        //     if (!this.jsScript) {
+        //         alert('Please enter URL of script/library')
+        //     }
+        //     this.jsConfig.scripts.push(this.jsScript)
+        // }
     },
     components: {
         'app-editor-setting': Setting

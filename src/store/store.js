@@ -8,6 +8,16 @@ export const store = new Vuex.Store({
         htmlCode: '',
         cssCode: '',
         jsCode: '',
+        htmlConfig: {
+            htmlTagClasses: '',
+            headStuff: ''
+        },
+        cssConfig: {
+            stylesheets: ''
+        },
+        jsConfig: {
+            scripts: ''
+        },
         output: '',
         saved: true
     },
@@ -29,6 +39,15 @@ export const store = new Vuex.Store({
         },
         setSaved(state, payload) {
             state.saved = payload;
+        },
+        setHtmlConfig(state, payload) {
+            state.htmlConfig = payload;
+        },
+        setCssConfig(state, payload) {
+            state.cssConfig = payload;
+        },
+        setJsConfig(state, payload) {
+            state.jsConfig = payload;
         }
     },
     actions: {
