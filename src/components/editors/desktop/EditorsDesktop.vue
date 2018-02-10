@@ -1,7 +1,7 @@
 <template>
     <div id="editor-wrapper" class="h-100">
         <template v-if="isModal === true">
-            <app-modal @close="isModal = false">
+            <app-modal @close="closeModal">
                 <app-modal-body>
                     <h5 class="mb-3 letter-spacing-1 text-uppercase">Code Settings</h5>
                     <app-tabs :light='true'>
@@ -23,7 +23,7 @@
                                     @onInput="headStuff = $event"></app-input>
                             </app-form-group>
                             <div class="text-right">
-                                <app-button type='light' @clicked="isModal = false">Close</app-button>
+                                <app-button type='light' @clicked="closeModal">Close</app-button>
                                 <app-button type='dark' @clicked="setHtmlConfig({htmlTagClasses, headStuff})">Save</app-button>
                             </div>
                         </app-tab>
@@ -37,7 +37,7 @@
                                     @onInput="stylesheets = $event"></app-input>
                             </app-form-group>
                             <div class="text-right">
-                                <app-button type='light' @clicked="isModal = false">Close</app-button>
+                                <app-button type='light' @clicked="closeModal">Close</app-button>
                                 <app-button type='dark' @clicked="setCssConfig({ stylesheets })">Save</app-button>
                             </div>
                         </app-tab>
@@ -51,7 +51,7 @@
                                     @onInput="scripts = $event"></app-input>
                             </app-form-group>
                             <div class="text-right">
-                                <app-button type='light' @clicked="isModal = false">Close</app-button>
+                                <app-button type='light' @clicked="closeModal">Close</app-button>
                                 <app-button type='dark' @clicked="setJsConfig({ scripts })">Save</app-button>
                             </div>
                         </app-tab>
@@ -88,73 +88,62 @@
 </template>
 
 <script>
-import Setting from '../editor/editor-setting/Setting.vue';
-import { mapActions, mapMutations, mapState } from 'vuex';
+import Setting from "../editor/editor-setting/Setting.vue";
+import { mapActions, mapMutations, mapState } from "vuex";
 
 export default {
-    data() {
-        return {
-            htmlTagClasses: '',
-            headStuff: '',
-            stylesheets: '',
-            scripts: '',
-            isModal: false,
-            whichTab: 'html'
-        }
+  data() {
+    return {
+      htmlTagClasses: "",
+      headStuff: "",
+      stylesheets: "",
+      scripts: "",
+      isModal: false,
+      whichTab: "html"
+    };
+  },
+  computed: {
+    ...mapState([
+      "htmlCode",
+      "cssCode",
+      "jsCode",
+      "htmlConfig",
+      "cssConfig",
+      "jsConfig"
+    ])
+  },
+  methods: {
+    ...mapMutations([
+      "setHtmlCode",
+      "setCssCode",
+      "setJsCode",
+      "setHtmlConfig",
+      "setCssConfig",
+      "setJsConfig"
+    ]),
+    ...mapActions(["showOutput", "getCodeFromStorage"]),
+    showModalAndTabs(tab) {
+      this.isModal = true;
+      this.whichTab = tab;
     },
-    computed: {
-        ...mapState([
-            'htmlCode',
-            'cssCode',
-            'jsCode',
-            'htmlConfig',
-            'cssConfig',
-            'jsConfig'
-        ])
-    },
-    methods: {
-        ...mapMutations([
-            'setHtmlCode',
-            'setCssCode',
-            'setJsCode',
-            'setHtmlConfig',
-            'setCssConfig',
-            'setJsConfig'
-        ]),
-        ...mapActions([
-            'showOutput',
-            'getCodeFromStorage',
-        ]),
-        showModalAndTabs(tab) {
-            this.isModal = true;
-            this.whichTab = tab;
-        },
-        // addStylesheet() {
-        //     if (!this.cssStylesheet) {
-        //         alert('Please enter URL of stylesheet/framework')
-        //     }
-        //     this.cssConfig.stylesheets.push(this.cssStylesheet)
-        // },
-        // addScript() {
-        //     if (!this.jsScript) {
-        //         alert('Please enter URL of script/library')
-        //     }
-        //     this.jsConfig.scripts.push(this.jsScript)
-        // }
-    },
-    components: {
-        'app-editor-setting': Setting
-    },
-    created() {
-        this.getCodeFromStorage();
-        this.showOutput();
+    closeModal() {
+      this.isModal = false;
+      this.showOutput();
     }
-}
+  },
+  components: {
+    "app-editor-setting": Setting
+  },
+  created() {
+    this.getCodeFromStorage();
+    this.showOutput();
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-    .editor {
-        height: calc(100 / 3 * 1%) !important;
-    }
+.editor {
+  height: calc(100 / 3 * 1%) !important;
+}
 </style>
 
