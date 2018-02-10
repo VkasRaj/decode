@@ -1,0 +1,2 @@
+webpackJsonp([8],{50:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var l=n(78),u=n(1),a=u(null,l.a,!0,null,null,null);t.default=a.exports},78:function(e,t,n){"use strict";var l=function(e,t){return(0,t._c)("div",{staticClass:"modal-body"},[t._t("default")],2)},u=[],a={render:l,staticRenderFns:u};t.a=a}});
+//# sourceMappingURL=8.build.js.map
