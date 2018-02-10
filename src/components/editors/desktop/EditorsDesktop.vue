@@ -11,7 +11,7 @@
                                 <app-input 
                                     slot="input" 
                                     placeholder="e.g. bg-primary text-white"
-                                    :val="htmlConfig.htmlTagClasses"
+                                    :val="htmlTagClasses"
                                     @onInput="htmlTagClasses = $event"></app-input>
                             </app-form-group>
                             <app-form-group label="Stuff for <head>">
@@ -19,7 +19,7 @@
                                 <app-input type='textarea' 
                                     slot="input" 
                                     placeholder="e.g. <meta> <link> <script>" 
-                                    :val="htmlConfig.headStuff"
+                                    :val="headStuff"
                                     @onInput="headStuff = $event"></app-input>
                             </app-form-group>
                             <div class="text-right">
@@ -33,7 +33,7 @@
                                 <app-input 
                                     slot="input" 
                                     placeholder="e.g. https://getbootstrap.com"
-                                    :val="cssConfig.stylesheets"
+                                    :val="stylesheets"
                                     @onInput="stylesheets = $event"></app-input>
                             </app-form-group>
                             <div class="text-right">
@@ -47,7 +47,7 @@
                                 <app-input 
                                     slot="input" 
                                     placeholder="e.g. https://code.jquery.com"
-                                    :val="jsConfig.scripts"
+                                    :val="scripts"
                                     @onInput="scripts = $event"></app-input>
                             </app-form-group>
                             <div class="text-right">
@@ -137,6 +137,12 @@ export default {
   created() {
     this.getCodeFromStorage();
     this.showOutput();
+  },
+  mounted() {
+    this.htmlTagClasses = this.htmlConfig.htmlTagClasses;
+    this.headStuff = this.htmlConfig.headStuff;
+    this.stylesheets = this.cssConfig.stylesheets;
+    this.scripts = this.jsConfig.scripts;
   }
 };
 </script>
