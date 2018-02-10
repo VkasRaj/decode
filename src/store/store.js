@@ -55,17 +55,23 @@ export const store = new Vuex.Store({
   },
   actions: {
     showOutput({ commit, state }) {
-      let output = `<head>
+      let output = `<html class="${state.htmlConfig.htmlTagClasses}">
+                        <head>
+                            ${state.htmlConfig.headStuff}
+                            ${state.cssConfig.stylesheets}
                             <style>
                                 ${state.cssCode}
                             </style>
                         </head>
                         <body>
                             ${state.htmlCode}
+
+                            ${state.jsConfig.scripts}
                             <script>
                                 ${state.jsCode}
                             </script>
-                        </body>`;
+                        </body>
+                    </html>`;
 
       sessionStorage.html = state.htmlCode;
       sessionStorage.css = state.cssCode;
@@ -74,13 +80,16 @@ export const store = new Vuex.Store({
       commit("setOutput", output);
       commit("setSaved", true);
     },
-    getCodeFromStorage({ commit }) {
-      let _html = sessionStorage.getItem("html") || "";
-      let _css = sessionStorage.getItem("css") || "";
-      let _js = sessionStorage.getItem("js") || "";
-      let _htmlConfig = JSON.parse(sessionStorage.getItem("htmlConfig")) || "";
-      let _cssConfig = JSON.parse(sessionStorage.getItem("cssConfig")) || "";
-      let _jsConfig = JSON.parse(sessionStorage.getItem("jsConfig")) || "";
+    getCodeFromStorage({ commit, state }) {
+      let _html = sessionStorage.getItem("html") || state.htmlCode;
+      let _css = sessionStorage.getItem("css") || state.cssCode;
+      let _js = sessionStorage.getItem("js") || state.jsCode;
+      let _htmlConfig =
+        JSON.parse(sessionStorage.getItem("htmlConfig")) || state.htmlConfig;
+      let _cssConfig =
+        JSON.parse(sessionStorage.getItem("cssConfig")) || state.cssConfig;
+      let _jsConfig =
+        JSON.parse(sessionStorage.getItem("jsConfig")) || state.jsConfig;
 
       commit("setHtmlCode", _html);
       commit("setCssCode", _css);
