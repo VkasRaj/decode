@@ -57,19 +57,21 @@ export const store = new Vuex.Store({
     showOutput({ commit, state }) {
       let output = `<html class="${state.htmlConfig.htmlTagClasses}">
                         <head>
-                            ${state.htmlConfig.headStuff}
-                            ${state.cssConfig.stylesheets}
-                            <style>
-                                ${state.cssCode}
-                            </style>
+                          ${state.htmlConfig.headStuff}
+                          <link rel="text/stylesheet" href="${
+                            state.cssConfig.stylesheets
+                          }" />
+                          <style>
+                              ${state.cssCode}
+                          </style>
                         </head>
                         <body>
-                            ${state.htmlCode}
+                          ${state.htmlCode}
 
-                            ${state.jsConfig.scripts}
-                            <script>
-                                ${state.jsCode}
-                            </script>
+                          <script src="${state.jsConfig.scripts}"></script>
+                          <script>
+                              ${state.jsCode}
+                          </script>
                         </body>
                     </html>`;
 
