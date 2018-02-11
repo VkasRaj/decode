@@ -11,7 +11,7 @@
                                 <app-input 
                                     slot="input" 
                                     placeholder="e.g. bg-primary text-white"
-                                    :val="htmlTagClasses"
+                                    :val="htmlConfig.htmlTagClasses"
                                     @onInput="htmlTagClasses = $event"></app-input>
                             </app-form-group>
                             <app-form-group label="Stuff for <head>">
@@ -19,7 +19,7 @@
                                 <app-input type='textarea' 
                                     slot="input" 
                                     placeholder="e.g. <meta> <link> <script>" 
-                                    :val="headStuff"
+                                    :val="htmlConfig.headStuff"
                                     @onInput="headStuff = $event"></app-input>
                             </app-form-group>
                             <div class="text-right">
@@ -33,7 +33,7 @@
                                 <app-input 
                                     slot="input" 
                                     placeholder="e.g. https://getbootstrap.com"
-                                    :val="stylesheets"
+                                    :val="cssConfig.stylesheets"
                                     @onInput="stylesheets = $event"></app-input>
                             </app-form-group>
                             <div class="text-right">
@@ -47,7 +47,7 @@
                                 <app-input 
                                     slot="input" 
                                     placeholder="e.g. https://code.jquery.com"
-                                    :val="scripts"
+                                    :val="jsConfig.scripts"
                                     @onInput="scripts = $event"></app-input>
                             </app-form-group>
                             <div class="text-right">
